@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .main-content{
     text-align: center;
     h2{
@@ -5,6 +6,23 @@
         font-size:60px;
         font-weight:bold;
         text-transform: capitalize;
+=======
+@import "header";
+$pointcolor : #cc3333;
+
+.test{
+    display:flex;
+    text-align:center;
+    font-size:16px;
+    justify-content: center;
+    align-items: center;
+    &::before{
+        content:'hello';
+        display:block;
+        width:100px;
+        height:100px;
+        font-size:13px;
+>>>>>>> origin/develop
     }
 
     #myChart{

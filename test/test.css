@@ -2,9 +2,27 @@
   text-align: center;
 }
 
+<<<<<<< HEAD
 .main-content h2 {
   margin: 80px 0 40px;
   font-size: 60px;
+=======
+.test::before {
+  content: 'hello';
+  display: block;
+  width: 100px;
+  height: 100px;
+  font-size: 13px;
+}
+
+.subpage-content {
+  padding: 60px 0;
+}
+
+.subpage-content .s-title {
+  margin-bottom: 50px;
+  font-size: 40px;
+>>>>>>> origin/develop
   font-weight: bold;
   text-transform: capitalize;
 }
