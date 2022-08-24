@@ -1,0 +1,11 @@
+<script>
+ $(function(){
+	//네비게이션 가로 넓이 균일하게
+	var windowW = $(window).width();
+	if(windowW>768){
+		var navWidth = 100 / ($('.navbar-nav > li').length - 1);
+		$('.navbar-nav > li').css('width', navWidth + '%');
+	}
+	
+}); 
+ </script>

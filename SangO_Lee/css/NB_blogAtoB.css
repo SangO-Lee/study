@@ -1,0 +1,48 @@
+/* 블로그 A타입을 B타입 형태로 바꾸는 css */
+.table_blog{
+	display: flex;
+	flex-wrap: wrap;
+	margin:0 -15px;
+	border:none;
+}
+.table_blog > dd{
+	flex:0 0 25%;
+	max-width: 25%;
+	margin-bottom:20px;
+	padding:20px 15px 0;
+	border:0;
+}
+.table_blog dd .left{
+	height:auto;
+	width:100%;
+}
+.table_blog dd .left a .thumb{
+	width:100%;
+	height:auto;
+	padding-top:70%;
+}
+.table_blog dd .right{
+	width:100%;
+	padding:20px 0;
+}
+.table_blog dd .right .title a{
+	display: block;
+	font-size: 18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.table_blog dd .right .text p{
+	display: -webkit-box;
+	word-wrap: break-word;
+	-webkit-line-clamp:3;
+	-webkit-box-orient:vertical;
+	white-space: initial;
+	min-height: 58px;
+	overflow: hidden;
+}
+@media (max-width:767px) {
+	.table_blog > dd{
+		flex:0 0 100%;
+		max-width: 100%;
+	}
+}

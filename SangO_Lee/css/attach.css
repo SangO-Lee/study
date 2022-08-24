@@ -1,0 +1,22 @@
+.dh-view-box .dh-attach h6 {
+	position:relative;
+	margin:5px;
+	padding-left:80px;
+	color:#fff;
+	line-height:1.6;
+	font-size:13px;
+	text-align:left;
+}
+.dh-view-box .dh-attach h6 b{
+	position:absolute;
+	left:0;
+	top:10px;
+	color:#111;
+	float:none;
+}
+.dh-view-box .dh-attach h6 a{
+    display:inline-block;
+    width:80%;
+	margin:0;
+	text-align:left;
+}

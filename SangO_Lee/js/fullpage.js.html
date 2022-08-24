@@ -1,0 +1,56 @@
+<div id="fullpage">
+	<div class="section">Some section</div>
+	<div class="section">Some section</div>
+	<div class="section">Some section</div>
+	<div class="section">Some section</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/public/fullpage/fullpage.css" />
+<script type="text/javascript" src="/public/fullpage/fullpage.js"></script>
+<script>
+	//fullpage js
+	$(document).ready(function() {
+		
+		if ($(window).width() > 767) {
+            //pc
+            $('#fullpage').fullpage({
+                //options here
+                licenseKey: 'EB89078A-F094493C-AADA2D4D-D1300A60',
+                autoScrolling: true,
+                scrollHorizontally: true,
+                lockAnchors: true,
+                navigation: true,
+                navigationPosition: 'right',
+                afterLoad: function (origin) {
+                    var loadedSection = this;
+                    var indiIdx = $("#fp-nav li .active").parent().index() - 1;
+                    if (indiIdx == -1) {
+                        indiIdx = 100;
+                    }
+                    $('.navbar-inverse .navbar-right > li').removeClass('on');
+                    $('.navbar-inverse .navbar-right > li').eq(indiIdx).addClass('on');
+                }
+            });
+        }else{
+            //mobile 
+            $('#fullpage .section').addClass('fp-auto-height');
+            $('#fullpage').fullpage({
+                //options here
+                licenseKey: 'EB89078A-F094493C-AADA2D4D-D1300A60',
+                autoScrolling: false,
+                scrollHorizontally: true,
+                lockAnchors: true,
+                navigation: true,
+                navigationPosition: 'right',
+                afterLoad: function (origin) {
+                    var loadedSection = this;
+                    var indiIdx = $("#fp-nav li .active").parent().index() - 1;
+                    if (indiIdx == -1) {
+                        indiIdx = 100;
+                    }
+                    $('.navbar-inverse .navbar-right > li').removeClass('on');
+                    $('.navbar-inverse .navbar-right > li').eq(indiIdx).addClass('on');
+                }
+            });
+        }
+});
+</script>

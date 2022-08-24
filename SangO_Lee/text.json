@@ -1,0 +1,34 @@
+[{
+    "idx": "1",
+    "type": "text",
+    "name": "휴대폰",
+    "des": "",
+    "inners": "",
+    "maxlength": "",
+    "required": "true",
+    "rank": "8"
+}, {
+    "type": "select",
+    "name": "문의유형",
+    "des": "",
+    "inners": "주요사업,자원봉사,회원후원,기타사항",
+    "maxlength": "",
+    "required": "true",
+    "rank": "2"
+}, {
+    "type": "radio",
+    "name": "주요사업",
+    "des": "",
+    "inners": "권익옹호,동료상담,개인별자립생활지원,탈시설·탈원화지원,자조모임,장애인주도건강증진사업",
+    "maxlength": "",
+    "required": "false",
+    "rank": "6"
+}, {
+    "type": "textarea",
+    "name": "문의내용",
+    "des": "",
+    "inners": "",
+    "maxlength": "",
+    "required": "true",
+    "rank": "0"
+}]

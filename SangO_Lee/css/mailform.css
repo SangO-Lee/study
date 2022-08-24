@@ -1,0 +1,32 @@
+/*Formmail*/
+#mailForm {
+    max-width: 850px;
+    margin: 0px auto 60px;
+    padding: 0 15px;
+}
+#mailForm .form-control {
+    border-radius: 2px;
+}
+#mailForm .form-group label {
+    font-size: 16px;
+    color: #333;
+    margin: 0 0 8px;
+}
+#mailForm .form-group .checkbox label {
+    font-size: 13px;
+    color: #555;
+}
+#mailForm .btn-primary {
+    width: 160px;
+    margin-left: 10px;
+    color: #fff;
+    background-color: #03b07d;
+    text-align: center;
+    font-size: 14px;
+    padding: 14px 0;
+    font-weight: 600;
+    border-radius: 2px;
+    box-shadow:none;
+    border: none;
+    margin: 0 auto;
+}

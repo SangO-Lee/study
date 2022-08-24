@@ -1,0 +1,28 @@
+.filter-items{
+    text-align: left;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.filter-items .filter-label{
+    padding: 0 20px;
+    margin: 0 3px;
+    min-width: 85px;
+    height: 45px;
+    line-height: 44px;
+    font-size: 15px;
+    text-align: center;
+    color : #888;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+.dh-board .filter-items > a > .filter-label:hover{
+    border-color: #ed1c24;
+    background: #fff;
+    color: #ed1c24;
+}
+.dh-board .filter-items > a.on > .filter-label, .dh-board .filter-items > a.on > .filter-label:hover{
+    background: #ed1c24;
+    position: relative;
+    border-color: #ed1c24;
+    color: #fff;
+}

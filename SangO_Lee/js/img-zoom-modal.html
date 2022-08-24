@@ -1,0 +1,64 @@
+<style>
+	/* img-zoom modal */
+#img-zoom.modal.fade .modal-dialog{
+	margin:0;
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,calc(-50% - 60px));
+}
+#img-zoom .modal-lg{
+	width: auto;
+}
+#img-zoom.modal.in .modal-dialog{
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+#img-zoom .modal-content{
+	box-shadow:none;
+	border:none;
+}
+#img-zoom .modal-body{
+	position:relative;
+	padding: 0;
+}
+#img-zoom .modal-body .close{
+	position:absolute;
+	right: 0;
+	top: 0;
+	color:#fff;
+	opacity:0.8;
+	font-size:40px;
+	text-shadow:0 0 3px rgba(0,0,0,0.6);
+	padding: 0px 10px 7px;
+	background: rgba(0,0,0,0.5);
+}
+#img-zoom img{
+	max-height:90vh;
+}
+</style>
+
+<!-- image zoom modal -->
+<div class="modal fade" id="img-zoom">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img src="#" alt="" class="img-responsive center-block">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+//img-zoom modal
+$('target').click(function(e){
+	e.preventDefault();
+	var _src = $(this).attr('src');
+	$('#img-zoom img').attr('src',_src);
+	$('#img-zoom').modal();
+});
+</script>

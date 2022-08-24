@@ -1,0 +1,28 @@
+<ul class="login-li">
+    <li class="login"><a href="/member/login">로그인</a></li>
+    <li class="join"><a href="/member/join">회원가입</a></li>
+    <li class="admin"><a href="/adm/dashboard">관리자</a></li>
+</ul>
+<script>
+    $(function(){
+        // 로그인 검증
+        if($('html').hasClass('logined')){
+            //회원일 때 
+            $('.login-li .login a').attr('href','/member/logout').text('로그아웃');
+            $('.login-li .join a').attr('href','/member/mypage').text('내 정보');
+
+            if($('html').hasClass('is_adm')){
+                //관리자일때
+                $('.admin').show();    
+            }else{
+                //일반회원일때
+                $('.admin').remove();
+                $('.join').remove();
+            }
+        }else{
+            //비회원일때 
+            $('.login-li .login a').attr('href','/member/login').text('로그인');
+            $('.admin').remove();
+        }
+    });
+</script>

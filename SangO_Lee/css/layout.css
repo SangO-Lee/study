@@ -1,0 +1,20 @@
+/*가로 100% 레이아웃 정의*/
+.container_contents,
+.intro-html-layout,
+.intro-html-layout > div,
+.footer_copy > div,
+.sub-layout{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+.intro-board-widget-layout,
+.dh-board,
+.dh-view-box,
+.bbs-list-view-layout + .row,
+#mailForm,
+#insertForm{
+	width:100%;
+	max-width:1170px;
+	margin:0 auto;
+}

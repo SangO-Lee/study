@@ -1,0 +1,274 @@
+@charset "utf-8";
+@import url('/skin/notokr/notokr.css');
+
+html {overflow-x: hidden; overflow-y: scroll;}
+.body-layout {background-color: #fff;}
+
+/* 폰트 설정 */
+.body-layout, h1, h2, h3, h4, h5, h6, input, textarea, button { font-family: 'notokr',  "NanumGothic", "나눔고딕", 'NanumBarunGothic', 'Apple SD Neo Gothic', 'Malgun Gothic', 'Gulim', sans-serif; }
+/* h1, h2, h3, h4, h5, h6, p { margin: 0px; } */
+ol, ul, li {
+	list-style: none;
+	list-style-position: inside;
+}
+
+.navbar .caret, 
+.navbar .divider-vertical, 
+.navbar ~ br,
+.footer-social-layout,
+.footer_copy .text-center > br,
+.topmarginLay_a {
+	display: none;
+}
+
+.navbar-inverse {
+	background-color: #FFF;
+	border-color: #EFEFEF;
+	margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #333;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+	color: #333;
+}
+.navbar-brand img{
+	margin-top:0;
+}
+
+@media screen and (min-width: 768px) {
+	.navbar-inverse .navbar-nav > li > a {
+	  	padding:35px 25px;
+	  	font-size:16px;
+	  	font-weight:500;
+		color: #333;
+	  	-webkit-text-shadow: none;
+	  	text-shadow: none;
+    }
+  
+ 	.navbar-inverse .navbar-nav > li > a:hover,
+	.navbar-inverse .navbar-nav > li > a:focus,
+	.navbar-inverse .navbar-nav > li:hover > a,
+	.navbar-inverse .navbar-nav > li:focus > a,
+	.navbar-inverse .navbar-nav > .open > a,
+	.navbar-inverse .navbar-nav > .open > a:hover,
+	.navbar-inverse .navbar-nav > .open > a:focus,
+	.navbar-inverse .navbar-nav > .active > a,
+	.navbar-inverse .navbar-nav > .active > a:hover,
+	.navbar-inverse .navbar-nav > .active > a:focus {
+		-webkit-box-shadow: none;
+	  	box-shadow: none;
+	  	background-color: transparent;
+	  	color: #ed1c24;
+  	}
+}
+@media screen and (min-width: 768px) {
+	.navbar-nav>li>.dropdown-menu {
+		left: 0;
+		right: auto;
+		animation-fill-mode: both;
+		animation-duration: .5s;
+		animation-name: fadeInRight;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+		border: none;
+		background-color: rgba(0, 0, 0, .85);
+	}
+
+	.divider-vertical+li .dropdown-menu {
+		left: auto;
+		right: 0;
+	}
+}
+
+.dropdown-menu > li > a {
+	padding: 7px 25px;
+	font-size: 15px;
+	color: #FFF;
+	text-transform: uppercase;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	background-color: transparent;
+	color: #FFF;
+	text-decoration: underline;
+}
+/* login */
+
+.login-layout,
+.id-find-layout,
+.pw-find-layout{
+    background: #f5f5f5;
+    padding: 100px 15px;
+}
+.login-layout .panel,
+.id-find-layout .panel,
+.pw-find-layout .panel{
+    box-shadow: none;
+    max-width: 500px;
+    padding: 80px 40px 80px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+}
+.login-layout .panel hr,
+.id-find-layout .panel hr,
+.pw-find-layout .panel hr{
+    display: none;
+}
+.login-layout .panel .panel-body,
+.id-find-layout .panel .panel-body,
+.pw-find-layout .panel .panel-body{
+    padding: 0;
+}
+.login-layout .panel-body > div.col-sm-12,
+.id-find-layout .panel-body > div.col-sm-12,
+.pw-find-layout .panel-body > div.col-sm-12 {
+    float: none;
+}
+.login-layout .panel-body > div.col-sm-12 h2,
+.id-find-layout .panel-body > div.col-sm-12 h2,
+.pw-find-layout .panel-body > div.col-sm-12 h2{
+    text-align: center;
+    margin: 0 0 15px;
+    line-height: 1;
+    color: #222;
+    font-size: 32px;
+}
+.inner-box-msg {
+    width: 100%;
+    text-align: center;
+    float: none;
+    margin-bottom: 30px;
+    padding: 0;
+}
+.inner-box-msg p {
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    color: #555;
+    margin: 0;
+}
+.inner-box-form {
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+}
+.login-layout label,
+.id-find-layout label,
+.pw-find-layout label{
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    color: #222;
+    font-weight: 500;
+    margin: 0 0 10px;
+    line-height: 1;
+}
+.login-layout .form-control,
+.id-find-layout .form-control,
+.pw-find-layout .form-control{
+    box-shadow: none;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+    height: 40px;
+    color: #555;
+    font-size: 15px;
+    letter-spacing: -0.03em;
+}
+.login-layout .form-control:focus,
+.id-find-layout .form-control:focus,
+.pw-find-layout .form-control:focus{
+    border-color: #aaa;
+}
+.login-layout .btn-warning,
+.id-find-layout .btn-warning,
+.pw-find-layout .btn-warning{
+    float: none;
+    width: 100%;
+    height: 50px;
+    background: #ed1c24;
+    border-radius: 0px;
+    border: none;
+    font-size: 15px;
+    letter-spacing: -0.03em;
+    box-shadow: none;
+    margin-top: 15px;
+    transition: all ease 0.3s;
+}
+.login-layout .btn-warning:hover,
+.id-find-layout .btn-warning:hover,
+.pw-find-layout .btn-warning:hover{
+    background: #ed1c24;
+}
+.login-layout form > div > p,
+.id-find-layout form > div > p,
+.pw-find-layout form > div > p{
+    width: 50%;
+    margin: 0;
+    float: left;
+    text-align: center;
+    line-height: 1;
+}
+.login-layout form > div > p + p,
+.id-find-layout form > div > p + p,
+.pw-find-layout form > div > p + p {
+    border-left: 1px solid #ccc;
+}
+.login-layout form > div > p > a,
+.id-find-layout form > div > p > a,
+.pw-find-layout form > div > p > a{
+    font-size: 14px;
+    color: #555;
+    letter-spacing: -0.03em;
+    display: block;
+    padding: 2px 0;
+}
+
+@media (max-width:768px){
+    .login-layout,
+    .id-find-layout,
+    .pw-find-layout {
+        padding: 20px 15px;
+    }
+    .login-layout .panel,
+    .id-find-layout .panel,
+    .id-find-layout .panel {
+        padding: 40px;
+    }
+    .login-layout .panel-body > div.col-sm-12 h2,
+    .id-find-layout .panel-body > div.col-sm-12 h2,
+    .pw-find-layout .panel-body > div.col-sm-12 h2{
+        font-size: 24px;
+    }
+    .inner-box-msg p {
+        font-size: 12px;
+    }
+    .login-layout label,
+    .id-find-layout label,
+    .pw-find-layout label {
+        font-size: 14px;
+    }
+    .login-layout .form-control,
+    .id-find-layout .form-control,
+    .pw-find-layout .form-control{
+        font-size: 13px;
+        height: 36px;
+    }
+    .login-layout form > div > p > a,
+    .id-find-layout form > div > p > a,
+    .pw-find-layout form > div > p > a{
+        font-size: 12px;
+    }
+    .login-layout .btn-warning,
+    .id-find-layout .btn-warning,
+    .pw-find-layout .btn-warning{
+        height: 45px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+}

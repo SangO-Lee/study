@@ -1,0 +1,48 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script>
+	$(document).ready(function() {
+		//메인 협력사 슬라이더
+		$('.owl-carousel').owlCarousel({
+			items:3,
+			loop:true,
+			margin:10,
+			nav:true,
+			navText:["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+			autoplay:true,
+    		autoplayTimeout:1000,
+			autoplaySpped:1000,
+    		autoplayHoverPause:true
+		});
+	});
+</script>
+<style>
+.owl-nav{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: -1;
+}
+.owl-carousel .owl-nav > button{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:25px!important;
+    opacity:0.4;
+}
+.owl-carousel .owl-nav > button:hover{
+    opacity:0.8;
+}
+.owl-prev{
+    left:-40px;
+}
+.owl-next{
+    right:-40px;
+}
+.owl-dots{
+    display:none;
+}
+</style>

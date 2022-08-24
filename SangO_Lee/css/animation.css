@@ -1,0 +1,32 @@
+/* animation */
+.ani{
+    animation-duration: 1s;
+    animation-fill-mode: both;
+	opacity: 0;
+}
+.active .ani.fd-in{    animation-name:fadeIn;}
+.active .ani.fd-up{    animation-name:fadeInUp;}
+.active .ani.fd-left{    animation-name:fadeInLeft;}
+.active .ani.fd-right{    animation-name:fadeInRight;}
+.active .ani.fd-down{    animation-name:fdDown;}
+.active .ani.t1{animation-delay: 0.2s;}
+.active .ani.t2{animation-delay: 0.4s;}
+.active .ani.t3{animation-delay: 0.6s;}
+.active .ani.t4{animation-delay: 0.8s;}
+.active .ani.t5{animation-delay: 1.0s;}
+.active .ani.t6{animation-delay: 1.2s;}
+.active .ani.t7{animation-delay: 1.4s;}
+.active .ani.t8{animation-delay: 1.6s;}
+@-webkit-keyframes fdDown {
+	from {
+	  opacity: 0;
+	  -webkit-transform: translate3d(0, -10%, 0);
+	  transform: translate3d(0, -10%, 0);
+	}
+  
+	to {
+	  opacity: 1;
+	  -webkit-transform: translate3d(0, 0, 0);
+	  transform: translate3d(0, 0, 0);
+	}
+  }

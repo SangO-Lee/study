@@ -1,0 +1,389 @@
+<button class="lang lang-k-btn active" onclick="ClickLangBtn('kr')" alt="Korean">Korean</button>
+<button class="lang lang-e-btn" onclick="ClickLangBtn('en')" alt="English">English</button>
+
+<script type="text/javascript" description="10PAGE New builder Multilang script v.2205.1">
+    var currLang = sessionStorage.getItem('currLang');
+    var currLink = document.location.href;
+    var isCurrMain = 0;
+    var linkArr = new Array();
+    linkArr = currLink.split('/');
+    if (!linkArr[3]) isCurrMain = 1;
+
+    $(document).ready(function () {
+        // 접속 시 기본 언어를 선택합니다.
+        // 한국어: kr / 영어: en / 중국어: cn / 일본어: jp
+        // 그 외에는 ISO 표준국가코드 2자리를 기준으로 지정합니다.
+        // 참조: http://www.iegate.net/country_code.php
+        if (!currLang) {
+            sessionStorage.setItem('currLang', 'kr');
+            currLang = 'kr';
+        }
+
+        ChangeLang_All();
+        if (isCurrMain) ChangeLang_main(); // 메인일 경우 메인 영역
+
+    });
+
+    // 언어 변경 버튼 클릭 시
+    function ClickLangBtn(ClickLang) {
+        var lastLang = currLang;
+        sessionStorage.setItem('currLang', ClickLang);
+        currLang = ClickLang;
+        var CurrentFileName = document.URL.substring(document.URL.lastIndexOf("/") + 1, document.URL.lastIndexOf("/") +
+            30);
+        var mainLang = CurrentFileName;
+        var subLang = CurrentFileName.slice(0, -3);
+
+        if (currLink.indexOf('/page') != -1) {
+            if (currLang == "kr") {
+                $(location).attr('href', '/page/' + subLang);
+            } else if (currLang == "en") {
+                //서브 언어만 아래와 같이 설정
+                lastLang == "kr" ? $(location).attr('href', '/page/' + mainLang + '_en') : $(location).attr('href', '/page/' + subLang + '_en');
+            }
+        }
+
+
+        ChangeLang_All();
+        if (isCurrMain) ChangeLang_main(); // 메인일 경우 메인 영역
+    }
+
+    function ChangeLang_All() {
+        ChangeLang_menu(); // 상단 메뉴
+        ChangeLang_footer(); // 하단 푸터
+        ChangeLang_default(); //기본 내용 번역
+        ChangeLang_bbs(); //추가 게시판 영역
+        
+        //현재 언어의 버튼에 active 클래스 추가
+        if (currLang == "kr") {
+            $('.lang').removeClass('active').removeAttr('disabled');
+            $('.lang-k-btn').addClass('active').attr('disabled', 'disabled');
+            $('#site').attr('lang','kr');
+        } else if (currLang == "en") {
+            $('.lang').removeClass('active').removeAttr('disabled');
+            $('.lang-e-btn').addClass('active').attr('disabled', 'disabled');
+            $('#site').attr('lang','en');
+        }
+    }
+    /*******************  페이지 전환 시 설정 끝*********************/
+
+    /*******************상단 네비게이션 바 변경 시작 *********************/
+    // 상단 메뉴
+    function ChangeLang_menu() {
+        
+        if (currLang == 'en') {
+            $('#m_0').html('<a href="/page/about01_en" target="_self">COMPANY</a>');
+
+            $('.lang-k-btn').removeClass('active');
+            $('.lang-e-btn').addClass('active');
+
+
+            //로그인 메뉴
+            if($('html').hasClass('logined')){ //회원일 때 
+                $('#gnbauth a[href="/member/logout"]').text('Logout');
+                $('#gnbauth a[href="/member/mypage"]').text('Mypage');
+                $('#gnbauth a[href="/adm"]').text('Admin page');
+            }else{ //비회원일때 
+                $('#gnbauth a[href="/member/login"]').text('Login');
+            }
+        } else if (currLang == 'kr') {
+            $('#m_0').html('<a href="/page/about01" target="_self">회사소개</a>');
+
+            $('.lang-e-btn').removeClass('active');
+            $('.lang-k-btn').addClass('active');
+            
+            //로그인 메뉴
+            if($('html').hasClass('logined')){ //회원일 때 
+                $('#gnbauth a[href="/member/logout"]').text('로그아웃');
+                $('#gnbauth a[href="/member/mypage"]').text('내 정보');
+                $('#gnbauth a[href="/adm"]').text('관리자페이지');
+            }else{ //비회원일때 
+                $('#gnbauth a[href="/member/login"]').text('로그인');
+            }
+        }
+    }
+
+    /*******************상단 네비게이션 바 변경 끝 *********************/
+
+    /*******************메인 html 변경 시작 *********************/
+    // 메인 영역
+    function ChangeLang_main() {
+        if (currLang == 'en') {
+            //English
+        } else if (currLang == 'kr') {
+            //Korean
+        } 
+        // 새로운 언어 필요 시 else if문을 추가하여 사용
+    }
+
+    // 하단 푸터
+    function ChangeLang_footer() {
+        if (currLang == 'en') {
+            //English
+        } else if (currLang == 'kr') {
+            //Korean
+        } 
+        // 새로운 언어 필요 시 else if문을 추가하여 사용
+    }
+    function ChangeLang_bbs(){
+        if (currLang == 'en') {
+            //English
+        } else if (currLang == 'kr') {
+            //Korean
+        } 
+    }
+
+    function ChangeLang_default() {
+        if (currLang == 'en') {
+            //English
+             //로그인 메뉴
+             if(!$('html').hasClass('logined')){//비회원
+                if($('#gnbauth > a').text() == '로그인'){
+                    $('#gnbauth > a').text('Login');
+                }else{
+                    $('#gnbauth > a').html('<i class="fas fa-user-circle"></i>');
+                }
+            }else{//회원
+                if($('html').hasClass('is_adm')){//관리자
+                    $('#gnbauth .dropdown-menu').html('	<li><a href="/adm" target="_blank">Admin Dashboard</a></li>\
+																		<li><a href="/member/mypage">Mypage</a></li>\
+												<li><a href="/member/logout">Logout</a></li>');
+                }else{//일반회원
+                    $('#gnbauth .dropdown-menu').html(' <li><a href="/member/mypage">Mypage</a></li>\
+												<li><a href="/member/logout">Logout</a></li>');
+                }
+            }
+
+            //form
+            $('#item_name th').html('<span class="required_text">*</span><span>Name</span>');
+            $('#item_name td input').attr('placeholder', 'Put your name');
+            $('#item_email th').html('<span class="required_text">*</span><span>E-mail</span>');
+            $('#item_email td').html(
+                '<input type="email" name="wr_email" id="wr_email" class="form-control form-control-big" value="" placeholder="Put your E-mail address">\
+                        <p style="margin-top:5px;margin-bottom:0" class="text-muted"><i class="fas fa-check-circle fa-fw"></i> We will reply to your email if you need additional formation.</p>'
+                );
+            $('#item_captcha th').html('<span class="required_text">*</span>reCHAPCHA');
+            $('#item_captcha td input').attr('placeholder', 'Put the code above');
+            $('#item_agree th').html('<span class="required_text">*</span>Personal Information Treatment Policy');
+            $('#item_agree td').html('<div class="checkbox" style="margin-bottom:0">\
+                            <label for="wr_agree">\
+                                <input type="checkbox" class="custom_checkbox" id="wr_agree" name="wr_agree">\
+                                <span>I agree to <a href="/member/privacy" target="_blank">Personal Information Treatment Policy.</a></span>\
+                            </label>\
+                        </div>');
+            $('form #list_btn').text('Receipt History');
+            $('form #write_btn').text('Send');
+
+            //login
+            $('.login_wrapper .member_wrapper > h1').text('Login');
+            $('.login_wrapper .member_wrapper > p').html('Click the \'Login\' button<br>After put your ID and password.');
+            $('.login_wrapper .form-group:nth-of-type(1) label').text('ID');
+            $('.login_wrapper .form-group:nth-of-type(1) input').attr('placeholder','Put your ID');
+            $('.login_wrapper .form-group:nth-of-type(2) label').text('PASSWORD');
+            $('.login_wrapper .form-group:nth-of-type(2) input').attr('placeholder','Put your password');
+            $('#login_btn ').text('Login');
+            $('.login_wrapper .login_extra li:nth-of-type(1) a').text('Find ID / PW');
+            $('.login_wrapper .login_extra li:nth-of-type(2) a').text('Join');
+            $('.login_wrapper .login_extra li:nth-of-type(3) a strong').text('Administrator');
+
+            //join
+            $('.join_wrapper .member_wrapper > h1').text('Join');
+            $('.join_agree h4').eq(0).text('Member Policy');
+            $('.join_agree label[for="join_agree_1"]').html('<input type="checkbox" id="join_agree_1"> I agree to member policy.');
+            $('.join_agree label[for="join_agree_1"]').next().text('(open in a new window)');
+            $('.join_agree h4').eq(1).text('Personal Information Treatment Policy');
+            $('.join_agree label[for="join_agree_2"]').html('<input type="checkbox" id="join_agree_2"> I agree to personal information treatment policy.');
+            $('.join_agree label[for="join_agree_2"]').next().text('(open in a new window)');
+            $('#join_agree_btn').text('Next');
+
+            $("#join_form table tr:nth-of-type(1) th").html('<span>*</span>ID');
+            $("#join_form table tr:nth-of-type(2) th").html('<span>*</span>Password');
+            $("#join_form table tr:nth-of-type(3) th").html('<span>*</span>Confirm the Password');
+            $("#join_form table tr:nth-of-type(4) th").html('<span>*</span>Name');
+            $("#join_form table tr:nth-of-type(5) th").html('<span>*</span>E-mail');
+            $("#join_form table tr:nth-of-type(6) th").html('Email agreement');
+            $("#join_form table tr:nth-of-type(7) th").html('<span>*</span>reCAPTCHA');
+            $("#join_form #mb_userid").attr('placeholder','4~20 Alphabets and numbers');
+            $("#join_form #id_check").html('Check Id');
+            $("#join_form #mb_pw").attr('placeholder','8~20 Alphabets, special characters and numbers');
+            $("#join_form #mb_pw2").attr('placeholder','Put the password again');
+            $("#join_form #mb_name").attr('placeholder','Put your name');
+            $("#join_form #mb_email").attr('placeholder','Put your email address');
+            $("#join_form #email_check").html('Check Email');
+            $("#join_form label[for='mb_mailing']").html('<input type="checkbox" id="mb_mailing" name="mb_mailing" value="1"> I agree to receive emails from this website.');
+            $("#join_form #wr_captcha").attr('placeholder','Put the code above.');
+            $("#join_form #join_prev_btn").html('Prev');
+            $("#join_form #join_btn").html('Send');
+            
+            //findidpw
+            $('#find_idpw h1').text('Find ID/Password');
+            $('#find_idpw p').html('<strong>To find your ID,</strong> put your E-mail Address and click \'<span class="text-primary">Find ID button</span>\',<br><strong>To find your password,</strong> put your ID either and click \'<span class="text-primary">Find Password button</span>\'.');
+            $('#find_idpw .form-group:nth-of-type(1) label').text('E-mail');
+            $('#find_idpw #mb_email').attr('placeholder','Put your E-mail address');
+            $('#find_idpw .form-group:nth-of-type(2) label').text('ID');
+            $('#find_idpw #mb_userid').attr('placeholder','Put your ID(*only for finding password)');
+            $('#find_btn').text('Find ID');
+            $('#find_idpw .login_extra li:nth-of-type(1) a').text('Login');
+            $('#find_idpw .login_extra li:nth-of-type(2) a').text('Join');
+            $('#find_idpw #mb_userid').on('propertychange change keyup paste input',function(){
+                $('#mb_userid').val() != "" ? $('#find_btn').text('Find Password') : $('#find_btn').text('Find ID');
+            });
+
+            //bbs
+            $('.table_default thead th.num').text('No.');
+            $('.table_default thead th.subject').text('Subject');
+            $('.table_default thead th.writer').text('Writer');
+            $('.table_default thead th.regdate').text('Date');
+            $('.table_default thead th.hits').text('Hits');
+            $('#search_kind option[value="wr_subject"]').text('Subject');
+            $('#search_kind option[value="wr_contents"]').text('Contents');
+            $('#search_kind option[value="wr_name"]').text('Writer');
+            $('#search_kind option[value="mb_userid"]').text('ID');
+            $('#search_query').attr('placeholder','Put keywords');
+            $('#search_btn').text('Search');
+            $('.write_btn_wrap #write_btn').text('Post');
+
+            $('#board_data_view .info span:nth-of-type(1) strong').text('Writer');
+            $('#board_data_view .info span:nth-of-type(2) strong').text('Date');
+            $('#board_data_view .info span:nth-of-type(3) strong').text('Hits');
+            $('#board_data_view + .option_wrap #write_btn').text('Edit');
+            $('#board_data_view + .option_wrap #delete_btn').text('Delete');
+            $('#board_data_view + .option_wrap .list_btn_wrap .btn').text('List');
+
+            $('#reply > h4').text('Comments');
+            $('#reply_btn').text('Add');
+            $('#reply_write .contents .form-control').attr('placeholder','Add comment (1,000 characters max)');
+            $('#reply_write #wr_name').attr('placeholder','Name');
+            $('#reply_write #wr_pw').attr('placeholder','Password');
+            $('#wr_reply_captcha').attr('placeholder','Enter Code');
+            if($('#reply_list >div > span').text() == "등록된 댓글이 없습니다."){
+                $('#reply_list >div > span').text('No Comments');
+            } ;
+
+        } else if (currLang == 'kr') {
+            //Korean
+            //로그인 메뉴
+            if(!$('html').hasClass('logined')){//비회원
+                if($('#gnbauth > a').text() == '로그인'){
+                    $('#gnbauth > a').text('로그인');
+                }else{
+                    $('#gnbauth > a').html('<i class="fas fa-user-circle"></i>');
+                }
+            }else{//회원
+                if($('html').hasClass('is_adm')){//관리자
+                    $('#gnbauth .dropdown-menu').html('	<li><a href="/adm" target="_blank">관리자 대시보드</a></li>\
+																		<li><a href="/member/mypage">내 정보</a></li>\
+												<li><a href="/member/logout">로그아웃</a></li>');
+                }else{//일반회원
+                    $('#gnbauth .dropdown-menu').html(' <li><a href="/member/mypage">내 정보</a></li>\
+												<li><a href="/member/logout">로그아웃</a></li>');
+                }
+            }
+
+            //form
+            $('#item_name th').html('<span class="required_text">*</span><span>이름</span>');
+            $('#item_name td input').attr('placeholder', '이름을 입력하세요');
+            $('#item_email th').html('<span class="required_text">*</span><span>이메일 주소</span>');
+            $('#item_email td').html(
+                '<input type="email" name="wr_email" id="wr_email" class="form-control form-control-big" value="" placeholder="이메일 주소를 입력하세요">\
+                        <p style="margin-top:5px;margin-bottom:0" class="text-muted"><i class="fas fa-check-circle fa-fw"></i>  접수하신 내용에 대해 별도 안내가 필요한 경우 해당 이메일 주소로 회신을 드립니다.</p>'
+                );
+            $('#item_captcha th').html('<span class="required_text">*</span>자동입력방지 코드');
+            $('#item_captcha td input').attr('placeholder', '위 코드를 입력하세요');
+            $('#item_agree th').html('<span class="required_text">*</span>개인정보 처리 방침');
+            $('#item_agree td').html('<div class="checkbox" style="margin-bottom:0">\
+                            <label for="wr_agree">\
+                                <input type="checkbox" class="custom_checkbox" id="wr_agree" name="wr_agree">\
+                                <span><a href="/member/privacy" target="_blank">개인정보처리방침</a>에 동의합니다</span>\
+                            </label>\
+                        </div>');
+            $('form #list_btn').text('접수 내역');
+            $('form #write_btn').text('접수');
+
+            //login
+            $('.login_wrapper .member_wrapper > h1').text('로그인');
+            $('.login_wrapper .member_wrapper > p').html('로그인 아이디와 비밀번호를 입력하신 후<br>\'로그인\' 버튼을 클릭하세요.');
+            $('.login_wrapper .form-group:nth-of-type(1) label').text('아이디');
+            $('.login_wrapper .form-group:nth-of-type(1) input').attr('placeholder','아이디를 입력하세요');
+            $('.login_wrapper .form-group:nth-of-type(2) label').text('비밀번호');
+            $('.login_wrapper .form-group:nth-of-type(2) input').attr('placeholder','비밀번호를 입력하세요');
+            $('#login_btn ').text('로그인');
+            $('.login_wrapper .login_extra li:nth-of-type(1) a').text('아이디/비밀번호 찾기');
+            $('.login_wrapper .login_extra li:nth-of-type(2) a').text('회원가입');
+            $('.login_wrapper .login_extra li:nth-of-type(3) a strong').text('관리자 로그인');
+
+            //join
+            $('.join_wrapper .member_wrapper > h1').text('회원가입');
+            $('.join_agree h4').eq(0).text('회원가입 약관');
+            $('.join_agree label[for="join_agree_1"]').html('<input type="checkbox" id="join_agree_1"> 회원가입 약관에 동의합니다.');
+            $('.join_agree label[for="join_agree_1"]').next().text('(새 창으로 보기)');
+            $('.join_agree h4').eq(1).text('개인정보 처리방침');
+            $('.join_agree label[for="join_agree_2"]').html('<input type="checkbox" id="join_agree_2">  개인정보 처리방침에 동의합니다.');
+            $('.join_agree label[for="join_agree_2"]').next().text('(새 창으로 보기)');
+            $('#join_agree_btn').text('다음');
+
+            $("#join_form table tr:nth-of-type(1) th").html('<span>*</span>아이디');
+            $("#join_form table tr:nth-of-type(2) th").html('<span>*</span>비밀번호');
+            $("#join_form table tr:nth-of-type(3) th").html('<span>*</span>비밀번호 확인');
+            $("#join_form table tr:nth-of-type(4) th").html('<span>*</span>이름');
+            $("#join_form table tr:nth-of-type(5) th").html('<span>*</span>이메일 주소');
+            $("#join_form table tr:nth-of-type(6) th").html('이메일 수신 동의');
+            $("#join_form table tr:nth-of-type(7) th").html('<span>*</span>자동입력방지 코드');
+            $("#join_form #mb_userid").attr('placeholder','4~20자의 영문/숫자');
+            $("#join_form #id_check").html('중복확인');
+            $("#join_form #mb_pw").attr('placeholder','8~20자의 영문/숫자/특수문자 조합');
+            $("#join_form #mb_pw2").attr('placeholder','비밀번호를 한번 더 입력하세요');
+            $("#join_form #mb_name").attr('placeholder','이름을 입력하세요');
+            $("#join_form #mb_email").attr('placeholder','이메일 주소를 입력하세요');
+            $("#join_form #email_check").html('중복확인');
+            $("#join_form label[for='mb_mailing']").html('<input type="checkbox" id="mb_mailing" name="mb_mailing" value="1"> 이메일 수신에 동의합니다.');
+            $("#join_form #wr_captcha").attr('placeholder','위 코드를 입력하세요');
+            $("#join_form #join_prev_btn").html('이전');
+            $("#join_form #join_btn").html('확인');
+
+             //findidpw
+             $('#find_idpw h1').text('아이디/비밀번호 찾기');
+            $('#find_idpw p').html('<strong>아이디를 찾는 경우</strong> 이메일을 입력하고 \'<span class="text-primary">아이디 찾기</span>\'를,<br><strong>비밀번호를 찾는 경우</strong> 아이디도 함께 입력하신 후 \'<span class="text-primary">비밀번호 찾기</span>\' 버튼을 클릭하세요.');
+            $('#find_idpw .form-group:nth-of-type(1) label').text('이메일 주소');
+            $('#find_idpw #mb_email').attr('placeholder','이메일 주소를 입력하세요');
+            $('#find_idpw .form-group:nth-of-type(2) label').text('아이디');
+            $('#find_idpw #mb_userid').attr('placeholder','아이디를 입력하세요(비밀번호 찾기 시)');
+            $('#find_btn').text('아이디 찾기');
+            $('#find_idpw .login_extra li:nth-of-type(1) a').text('로그인');
+            $('#find_idpw .login_extra li:nth-of-type(2) a').text('회원가입');
+
+            //bbs
+            $('.table_default thead th.num').text('번호');
+            $('.table_default thead th.subject').text('제목');
+            $('.table_default thead th.writer').text('작성자');
+            $('.table_default thead th.regdate').text('날짜');
+            $('.table_default thead th.hits').text('조회수');
+            $('#search_kind option[value="wr_subject"]').text('제목');
+            $('#search_kind option[value="wr_contents"]').text('내용');
+            $('#search_kind option[value="wr_name"]').text('작성자 이름');
+            $('#search_kind option[value="mb_userid"]').text('작성자 아이디');
+            $('#search_query').attr('placeholder','검색어를 입력하세요');
+            $('#search_btn').text('검색');
+            $('.write_btn_wrap #write_btn').text('게시글 작성');
+
+            $('#board_data_view .info span:nth-of-type(1) strong').text('작성자');
+            $('#board_data_view .info span:nth-of-type(2) strong').text('날짜');
+            $('#board_data_view .info span:nth-of-type(3) strong').text('조회수');
+            $('#board_data_view + .option_wrap #write_btn').text('수정');
+            $('#board_data_view + .option_wrap #delete_btn').text('삭제');
+            $('#board_data_view + .option_wrap .list_btn_wrap .btn').text('목록');
+
+            $('#reply > h4').text('댓글');
+            $('#reply_btn').text('등록');
+            $('#reply_write .contents .form-control').attr('placeholder','댓글 내용 입력 (최대 1,000자)');
+            $('#reply_write #wr_name').attr('placeholder','이름');
+            $('#reply_write #wr_pw').attr('placeholder','비밀번호');
+            $('#wr_reply_captcha').attr('placeholder','코드 입력');
+            if($('#reply_list >div > span').text() == "등록된 댓글이 없습니다."){
+                $('#reply_list >div > span').text('등록된 댓글이 없습니다.');
+            } ;
+        }
+    }
+
+    /*******************메인 html 변경 끝 *********************/
+</script>

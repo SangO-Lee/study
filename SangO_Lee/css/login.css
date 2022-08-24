@@ -1,0 +1,175 @@
+/* login */
+
+.login-layout,
+.id-find-layout,
+.pw-find-layout{
+    background: #f5f5f5;
+    padding: 100px 15px;
+}
+.login-layout .panel,
+.id-find-layout .panel,
+.pw-find-layout .panel{
+    box-shadow: none;
+    max-width: 500px;
+    padding: 80px 40px 80px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+}
+.login-layout .panel hr,
+.id-find-layout .panel hr,
+.pw-find-layout .panel hr{
+    display: none;
+}
+.login-layout .panel .panel-body,
+.id-find-layout .panel .panel-body,
+.pw-find-layout .panel .panel-body{
+    padding: 0;
+}
+.login-layout .panel-body > div.col-sm-12,
+.id-find-layout .panel-body > div.col-sm-12,
+.pw-find-layout .panel-body > div.col-sm-12 {
+    float: none;
+}
+.login-layout .panel-body > div.col-sm-12 h2,
+.id-find-layout .panel-body > div.col-sm-12 h2,
+.pw-find-layout .panel-body > div.col-sm-12 h2{
+    text-align: center;
+    margin: 0 0 15px;
+    line-height: 1;
+    color: #222;
+    font-size: 32px;
+}
+.inner-box-msg {
+    width: 100%;
+    text-align: center;
+    float: none;
+    margin-bottom: 30px;
+    padding: 0;
+}
+.inner-box-msg p {
+    font-size: 14px;
+    letter-spacing: -0.03em;
+    color: #555;
+    margin: 0;
+}
+.inner-box-form {
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+}
+.login-layout label,
+.id-find-layout label,
+.pw-find-layout label{
+    font-size: 16px;
+    letter-spacing: -0.03em;
+    color: #222;
+    font-weight: 500;
+    margin: 0 0 10px;
+    line-height: 1;
+}
+.login-layout .form-control,
+.id-find-layout .form-control,
+.pw-find-layout .form-control{
+    box-shadow: none;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+    height: 40px;
+    color: #555;
+    font-size: 15px;
+    letter-spacing: -0.03em;
+}
+.login-layout .form-control:focus,
+.id-find-layout .form-control:focus,
+.pw-find-layout .form-control:focus{
+    border-color: #aaa;
+}
+.login-layout .btn-warning,
+.id-find-layout .btn-warning,
+.pw-find-layout .btn-warning{
+    float: none;
+    width: 100%;
+    height: 50px;
+    background: #117b4e;
+    border-radius: 0px;
+    border: none;
+    font-size: 15px;
+    letter-spacing: -0.03em;
+    box-shadow: none;
+    margin-top: 15px;
+    transition: all ease 0.3s;
+}
+.login-layout .btn-warning:hover,
+.id-find-layout .btn-warning:hover,
+.pw-find-layout .btn-warning:hover{
+    background: #11ab69;
+}
+.login-layout form > div > p,
+.id-find-layout form > div > p,
+.pw-find-layout form > div > p{
+    width: 50%;
+    margin: 0;
+    float: left;
+    text-align: center;
+    line-height: 1;
+}
+.login-layout form > div > p + p,
+.id-find-layout form > div > p + p,
+.pw-find-layout form > div > p + p {
+    border-left: 1px solid #ccc;
+}
+.login-layout form > div > p > a,
+.id-find-layout form > div > p > a,
+.pw-find-layout form > div > p > a{
+    font-size: 14px;
+    color: #555;
+    letter-spacing: -0.03em;
+    display: block;
+    padding: 2px 0;
+}
+
+@media (max-width:768px){
+    .login-layout,
+    .id-find-layout,
+    .pw-find-layout {
+        padding: 20px 15px;
+    }
+    .login-layout .panel,
+    .id-find-layout .panel,
+    .id-find-layout .panel {
+        padding: 40px;
+    }
+    .login-layout .panel-body > div.col-sm-12 h2,
+    .id-find-layout .panel-body > div.col-sm-12 h2,
+    .pw-find-layout .panel-body > div.col-sm-12 h2{
+        font-size: 24px;
+    }
+    .inner-box-msg p {
+        font-size: 12px;
+    }
+    .login-layout label,
+    .id-find-layout label,
+    .pw-find-layout label {
+        font-size: 14px;
+    }
+    .login-layout .form-control,
+    .id-find-layout .form-control,
+    .pw-find-layout .form-control{
+        font-size: 13px;
+        height: 36px;
+    }
+    .login-layout form > div > p > a,
+    .id-find-layout form > div > p > a,
+    .pw-find-layout form > div > p > a{
+        font-size: 12px;
+    }
+    .login-layout .btn-warning,
+    .id-find-layout .btn-warning,
+    .pw-find-layout .btn-warning{
+        height: 45px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+}

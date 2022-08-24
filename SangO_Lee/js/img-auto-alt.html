@@ -1,0 +1,11 @@
+<script des="포항공대 기계과">
+    //img auto alt
+    var imgnum = $('img').length;
+    for(var i = 0; i < imgnum ; i++){
+        var src = $('img').eq(i).attr('src');
+        var srcidx = src.lastIndexOf('/');
+        srcidx++;
+        src = src.slice(srcidx);
+        $('img').eq(i).attr('alt',src);
+    }
+</script>

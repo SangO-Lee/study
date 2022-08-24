@@ -1,0 +1,20 @@
+<script>
+    if($('#form_contact').length){
+        $('#item_name th').html('<span class="required_text">*</span><span>Name</span>');
+        $('#item_name td input').attr('placeholder','');
+        $('#item_email th').html('<span class="required_text">*</span><span>E-mail</span>');
+        $('#item_email td').html('<input type="email" name="wr_email" id="wr_email" class="form-control form-control-big" value="">\
+                        <p style="margin-top:5px;margin-bottom:0" class="text-muted"><i class="fas fa-check-circle fa-fw"></i> We will reply to your email if you need additional formation.</p>');
+        $('#item_captcha th').html('<span class="required_text">*</span>reCHAPCHA');
+        $('#item_captcha td input').attr('placeholder','');
+        $('#item_agree th').html('<span class="required_text">*</span>Personal Information Treatment Policy');
+        $('#item_agree td').html('<div class="checkbox" style="margin-bottom:0">\
+                            <label for="wr_agree">\
+                                <input type="checkbox" class="custom_checkbox" id="wr_agree" name="wr_agree">\
+                                <span>I\'m agree with <a href="/member/privacy" target="_blank">Personal Information Treatment Policy.</a></span>\
+                            </label>\
+                        </div>');
+        $('#list_btn').text('Cancle');
+        $('#write_btn').text('Send');
+    }
+</script>

@@ -1,0 +1,19 @@
+<script>
+
+$(function(){
+	//img wrap
+		if($('.img-box').length){
+		 var imgb = $('.img-box');
+		  for(var i=0; i<imgb.length; i++) {
+			var imgsrc = imgb.eq(i).attr('data-src');
+			imgb.eq(i).css('background-image', 'url(' + imgsrc + ')');
+		  }
+			
+			$('.img-box').click(function(){
+				var modalsrc = $(this).attr('data-src');
+				$('#img-zoom img').attr('src',modalsrc);
+				$('#img-zoom').modal();
+			});
+		}
+})
+</script>

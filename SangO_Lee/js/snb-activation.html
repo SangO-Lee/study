@@ -1,0 +1,93 @@
+<!--예시 snb 구조-->
+<div class="snb">
+    <ul class="main-snb">
+        <li class="active"><a href="/page/business011">항공화물운송</a>
+            <ul class="sub-snb">
+                <li class="active"><a href="/page/business011">사업개요</a></li>
+                <li><a href="/page/business012">사업분야</a></li>
+                <li><a href="/page/business013">운항노선</a></li>
+                <li><a href="/page/business014">운항정보</a></li>
+                <li><a href="/page/business015">물류정보</a></li>
+            </ul>
+        </li>
+        <li><a href="/page/business021">육상화물운송</a>
+            <ul class="sub-snb">
+                <li><a href="/page/business021">사업개요</a></li>
+                <li><a href="/page/business022">사업분야</a></li>
+                <li><a href="/page/business023">운송정보</a></li>
+                <li><a href="/page/business024">시설 및 장비</a></li>
+            </ul>
+        </li>
+        <li><a href="/page/business031">유통</a>
+            <ul class="sub-snb">
+                <li><a href="/page/business031">사업개요</a></li>
+                <li><a href="/page/business032">사업분야</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!--//예시 snb 구조-->
+<script description="snb를 삽입하고 자동으로 active 활성화">
+    $(function(){
+        //서브페이지 아이디와 url상의 페이지 명이 일치할 경우 snb의 li에 active를 붙여준다
+        function activation(bbsCheck){
+            var _bbs = 0;
+            if(bbsCheck != null) _bbs = bbsCheck; //게시판,주문폼 여부 체크
+            var subpageId = $('.subpage').attr('id'); //서브페이지 아이디
+            var snbLength = $('.snb li').length; //snb li 총 갯수
+            if(_bbs == 0){//일반페이지
+                for(var i=0; i<snbLength;i++){
+                    var _link = $('.snb li').eq(i).children('a').attr('href');
+                    _link = _link.substring(_link.lastIndexOf("/") + 1, _link.lastIndexOf("/") + 30);
+                    _link = _link.replace('.html','');
+                    subpageId == _link ? $('.snb li').eq(i).addClass('active') : null;
+                    if(!$('.snb .active').closest('ul').hasClass('main-snb')){
+                        $('.snb .active').closest('ul').parent().addClass('active');
+                    }
+                }
+            }else{//게시판, 주문폼 등
+                var _pageTitle = $('.s-title h3').text().trim();//서브페이지 제목과 snb 메뉴명이 일치하는지 여부로 구분
+				for(var i=0; i<snbLength;i++){
+					var _menuTitle = $('.main-snb li').eq(i).children('a').text().trim();
+					_menuTitle == _pageTitle ?  $('.main-snb li').eq(i).addClass('active') : null;
+                    if(!$('.snb .active').closest('ul').hasClass('main-snb')){
+                        $('.snb .active').closest('ul').parent().addClass('active');
+                    }
+				}
+            }
+        }
+        var _snb ="";
+        if($('div[id^="business"]').length){// 서브페이지 별로 달아주면 됨
+             _snb = ' <ul class="main-snb">\
+                        <li><a href="/page/business011">항공화물운송</a>\
+                            <ul class="sub-snb">\
+                                <li><a href="/page/business011">사업개요</a></li>\
+                                <li><a href="/page/business012">사업분야</a></li>\
+                                <li><a href="/page/business013">운항노선</a></li>\
+                                <li><a href="/page/business014">운항정보</a></li>\
+                                <li><a href="/page/business015">물류정보</a></li>\
+                            </ul>\
+                        </li>\
+                        <li><a href="/page/business021">육상화물운송</a>\
+                            <ul class="sub-snb">\
+                                <li><a href="/page/business021">사업개요</a></li>\
+                                <li><a href="/page/business022">사업분야</a></li>\
+                                <li><a href="/page/business023">운송정보</a></li>\
+                                <li><a href="/page/business024">시설 및 장비</a></li>\
+                            </ul>\
+                        </li>\
+                        <li><a href="/page/business031">유통</a>\
+                            <ul class="sub-snb">\
+                                <li><a href="/page/business031">사업개요</a></li>\
+                                <li><a href="/page/business032">사업분야</a></li>\
+                            </ul>\
+                        </li>\
+                    </ul>';
+                $(_snb).appendTo('.snb');
+                activation();
+        }else{
+            $(_snb).appendTo('.snb');
+            activation('bbs');
+        }
+    });
+</script>

@@ -1,0 +1,60 @@
+<script>
+    $(function(){
+        //target이라는 파라미터 선언하여 이동하는 방법
+        // 스크롤링 이벤트가 작동하는 페이지가 여러개이고 작동하지 않는 페이지가 공존할 떄 사용
+
+         //해당 위치로 이동하는 함수
+         function paraScroll(targetHash){
+            target = '#' + targetHash;
+            var targetTop = $(target).offset().top;
+            $('html,body').animate({
+                scrollTop: targetTop - 100
+            }, 1000, 'easeOutCubic');
+        }
+
+        //화면 로드시 url에 있는 파라미터를 기준으로 이동
+        var parsedUrl = new URL(window.location.href);
+        var target = parsedUrl.searchParams.get("target");
+        if(target){
+            paraScroll(target);
+        }
+       
+        // 메뉴 클릭시 이벤트 설정
+        $('.navbar-right a').click(function (e) {
+            e.preventDefault();
+            var thisUrl = $(this).attr('href');
+            var paraCk = thisUrl.indexOf('target');
+            if (paraCk == -1) {
+                //파라미터가 없을 경우 
+                $(location).attr('href', thisUrl);
+
+            } else {
+                //파라미터가 있을경우
+                if(location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')){
+                    //같은 페이지 내
+                    thisUrl = thisUrl.split('?target=');
+                    paraScroll(thisUrl[1]);
+                }else{
+                    // 다른페이지일 경우
+                    $(location).attr('href', thisUrl);
+                }
+                
+            }
+        });
+    });
+</script>
+
+<script>
+    // 익스에서 serarchparams 작동안하는 문제 해결법
+    $.urlParam = function(name){
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			if (results == null){
+				return null;
+			}
+			else {
+				return decodeURI(results[1]) || 0;
+			}
+		}
+
+        var page_idx = $.urlParam('per_page');
+</script>

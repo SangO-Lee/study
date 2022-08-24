@@ -1,0 +1,365 @@
+<div class="banner_wrap inquiry">
+	<p class="banner_tit">제작/견적문의</p>
+	<p class="banner_txt">무엇을 도와드릴까요?<br>저희는 언제나 준비되어 있습니다.</p>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/asset/css/fileStyles.css" />
+<script type="text/javascript" src="/asset/js/jquery.fileupload.js"></script>
+<!-- s: 문의하기 -->
+<div class="content_wrap">
+	<div class="cont type3">
+		<div class="inquiry_des">
+			홈페이지 서비스에 대한 궁금증은 물론 홈페이지 관리 방법 등<br>
+			회사홈페이지 관련 궁금하신 점을 자유롭게 문의 주세요. 해결 방법을 알려드리겠습니다!
+		</div>
+		<input type="hidden" name="bd_id" id="bd_id" value="{bd_id}" />
+		<input type="hidden" name="tmpfilekey" id="tmpfilekey" value="" />
+		<table class="inquiry_table" cellpadding="0">
+			<colgroup>
+				<col width="300">
+				<col width="*">
+			</colgroup>
+			<tr>
+				<th class="tit">
+					<i class="important_icon"></i>
+					<span>문의 유형</span>
+				</th>
+				<td class="radio">
+					<label for="inquiry_type2" class="radio_custom">
+						<input type="radio" id="inquiry_type2" name="inquiry_type" value="2"{? inquiry_type !== "visit" && inquiry_type !== "visit_self"} checked{/}>
+						<span>제작문의</span>
+					</label>
+					<label for="inquiry_type1" class="radio_custom">
+						<input type="radio" id="inquiry_type1" name="inquiry_type" value="1"{? inquiry_type == "estimate"} checked{/}>
+						<span>견적문의</span>
+					</label>
+					<label for="inquiry_type3" class="radio_custom">
+						<input type="radio" id="inquiry_type3" name="inquiry_type" value="3"{? inquiry_type == "visit" || inquiry_type == "visit_self"} checked{/}>
+						<span style="font-weight:700;color:#285DE6">방문상담</span>
+					</label>
+				</td>
+			</tr>
+			<tr id="inquiry_type3_place"{? inquiry_type !== "visit" && inquiry_type !== "visit_self"}style="display:none"{/}>
+				<th class="tit padding" style="padding-top:23px;vertical-align:top">
+					<span>날짜 및 장소 선택</span>
+				</th>
+				<td class="radio" colspan="3" style="padding-top:20px;padding-bottom:20px;">
+					<label for="inquiry_type3_pull" class="radio_custom">
+						<input type="radio" id="inquiry_type3_pull" name="inquiry_type3" value="1"{? inquiry_type == "visit"} checked{/}>
+						<span>
+							<strong>방문	요청</strong> - 우리 회사로 방문을 요청합니다.
+							<small style="font-size:14px;color:#777">(수도권 지역만 가능, 일부 지역은 방문이 어려울 수 있습니다)</small>
+						</span>
+					</label>
+					<div id="inquiry_type3_pull_body"{? inquiry_type !== "visit"} style="display:none"{/}>
+						<input type="text" id="inquiry_visit1_date" name="inquiry_visit1_date" placeholder="희망날짜 선택" readonly>
+						<select id="inquiry_visit1_area" name="inquiry_visit1_area">
+							<option selected disabled>지역 선택</option>
+							<option value="서울">서울</option>
+							<option value="인천">인천</option>
+							<option value="경기">경기</option>
+						</select>
+						<input type="text" id="inquiry_visit1_addr" name="inquiry_visit1_addr" placeholder="상세 주소 입력(도로명)" style="width:450px;margin-top:2px">
+						<div class="clearfix"></div>
+						<!--span>*방문 요청의 경우 소정의 출장상담 비용(30,000원/VAT 별도)이 발생합니다. 상세 일정은 유선으로 안내해 드립니다.</span//-->
+						<span style="line-height:1.4;padding-top:10px;display:block">* 출장 상담비 : 기본 30,000원/VAT별도 (출장 거리에 따라 차등 요금이 부과됩니다.) <br>* 방문 요청시 <u style="color:inherit"><b style="color:inherit">메인 시안</b></u>을 제작해 드립니다. 유선상담을 통해 문의해주세요.</span> 
+					</div>
+					<div class="clearfix"></div>
+					<label for="inquiry_type3_push" class="radio_custom">
+						<input type="radio" id="inquiry_type3_push" name="inquiry_type3" value="2"{? inquiry_type == "visit_self"} checked{/}>
+						<span>
+							<strong>직접 방문</strong> - 10page(리눅스웨어) 사무실로 찾아가겠습니다.</label>
+						</span>
+					</label>
+					<div id="inquiry_type3_push_body"{? inquiry_type !== "visit_self"} style="display:none"{/}>
+						<input type="text" id="inquiry_visit2_date" name="inquiry_visit2_date" placeholder="희망날짜 선택" readonly>
+						<span>주소: 서울특별시 강남구 테헤란로78길 16, 8층(대치동, 노벨빌딩) <a href="https://map.kakao.com/?map_type=TYPE_MAP&from=roughmap&srcid=9176039&itemId=9176039&q=%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9B%A8%EC%96%B4&urlX=512232.0&urlY=1112668.0" target="_blank"><strong style="color:#367BF6">[카카오맵 바로가기]</strong></a></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="tit">
+					<i class="important_icon"></i>
+					<span>회사명/이름</span>
+				</th>
+				<td class="text">
+					<input type="text" name="inquiry_name" id="inquiry_name" value="" tit="회사명/이름" validate="required:true" maxlength="30" />
+				</td>
+			</tr>
+			<tr>
+				<th class="tit">
+					<i class="important_icon"></i>
+					<span>연락처</span>
+				</th>
+				<td class="text">
+					<input type="text" name="inquiry_phone" id="inquiry_phone" value="" tit="연락처" validate="required:true" maxlength="16" placeholder="숫자만 입력해 주세요." />
+				</td>
+			</tr>
+			<tr>
+				<th class="tit">
+					<i class="important_icon"></i>
+					<span>E-mail</span>
+				</th>
+				<td class="text">
+					<input type="text" name="inquiry_mail" id="inquiry_mail" value="" tit="이메일" validate="required:true" />
+				</td>
+			</tr>
+			<tr>
+				<th class="tit padding" style="padding-top:30px;vertical-align:top">
+					<span>문의 내용</span>
+				</th>
+				<td class="text" colspan="3">
+					<textarea name="inquiry_description" id="inquiry_description" value="" tit="문의 내용" rows="5" placeholder="상세한 문의 및 요구 사항을 입력해 주세요."></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th class="tit padding">
+					<span>현재 운영 사이트</span>
+				</th>
+				<td class="text">
+					<input type="text" name="inquiry_curr" id="inquiry_curr" value="" tit="현재 운영 사이트" style="width:400px" />
+				</td>
+			</tr>
+			<tr>
+				<th class="tit padding">
+					<span>제작에 참고할 사이트</span>
+				</th>
+				<td class="text">
+					<input type="text" name="inquiry_ref" id="inquiry_ref" value="" tit="참고 사이트" placeholder="참고 할만한 동종업계 및 경쟁회사 홈페이지를 입력해 주세요."
+					 style="width:400px" />
+				</td>
+			</tr>
+			<tr>
+				<th class="tit padding">
+					<span>파일 첨부</span>
+				</th>
+				<td class="text" colspan="3">
+					<div class="file_btn" id="file_btn">파일선택</div>
+					{# upload}
+				</td>
+			</tr>
+		</table>
+		<div class="agree_box">
+			<label for="inquiry_agree" class="checkbox_custom">
+				<input type="checkbox" id="inquiry_agree" tit="개인정보 수집 및 이용 방침" class="agree_check">
+				<span>
+					<a href="/front/member/terms/privacyguide" target="_blank">개인정보 수집 및 이용 방침</a>에 동의합니다.
+				</span>
+			</label>
+		</div>
+		<div class="tc">
+			<a class="blue_btn" href="javascript:ga_url('inquiry_submit_20180327');" id="inquiry_request">
+				<span>보내기</span>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- s: 문의하기-->
+<script>
+var cs_form = {
+	id_prefix: 'inquiry',
+	required_input: ['name', 'phone', 'mail', 'agree'],
+	submit: 'request',
+	empty_msg: {
+		text: '_tit_을(를) 입력해주세요.',
+		checkbox: '_tit_에 동의해주세요.',
+	},
+	validate_msg: '_tit_ 형식을 확인해주세요.',
+	complete_msg: '문의가 정상적으로 접수되었습니다.\n담당자가 내용 확인 후 유선 또는 메일로 안내 드리겠습니다.',
+	state: 'idle',
+	activate: function () {
+		var submitter = '#' + this.id_prefix + '_' + this.submit;
+		var input_list = this.required_input;
+		var input_prefix = this.id_prefix;
+		var msg_list = this.empty_msg;
+		var confirm_msg = this.complete_msg;
+		var validate_msg = this.validate_msg;
+
+		$(submitter).on('click', function () {
+			var is_complete = true;
+			var is_validate = true;
+			var alert_msg = '';
+			var target;
+			var type;
+			var tit;
+
+			if (cs_form.state === 'idle') {
+				cs_form.state = 'validating';
+			}
+			else {
+				// 중복 submit 방지
+				return false;
+			}
+
+			$.each(input_list, function (idx, elem) {
+				target = '#' + input_prefix + '_' + elem;
+				type = $(target).attr('type');
+				tit = $(target).attr('tit');
+
+				if (type === 'text') {
+					if ($.trim($(target).val()) === '') {
+						is_complete = false;
+						return false;
+					}
+
+					// if (elem === "phone") {
+					// 	if ($.trim($(target).val()).phone() === false) {
+					// 		is_complete = false;
+					// 		is_validate = false;
+					// 		return false;
+					// 	}
+					// }
+
+					if (elem === "mail") {
+						if ($.trim($(target).val()).mail() === false) {
+							is_complete = false;
+							is_validate = false;
+							return false;
+						}
+					}
+				}
+				else if (type === 'checkbox') {
+					if (!$(target).prop('checked')) {
+						is_complete = false;
+						return false;
+					}
+				}
+			});
+
+			if (!is_complete) {
+				alert_msg = msg_list[type].replace('_tit_', tit);
+				if (is_validate === false) {
+					alert_msg = validate_msg.replace('_tit_', tit);
+				}
+				alert(alert_msg);
+				$(target).focus();
+				cs_form.state = 'idle';
+				is_complete = false;
+				return false;
+			}
+
+			var form_data = {};
+
+			$.each(input_list, function (idx, elem) {
+				target = '#' + input_prefix + '_' + elem;
+
+				form_data[elem] = encodeURIComponent($(target).val());
+			});
+
+			form_data["inquiry_type"] = $('input[name="inquiry_type"]:checked').val(); // 문의 유형
+			form_data["inquiry_type3"] = $('input[name="inquiry_type3"]:checked').val(); // 방문 유형
+			form_data["inquiry_visit1_date"] = $('#inquiry_visit1_date').val(); // 방문 요청 날짜
+			form_data["inquiry_visit1_area"] = $('#inquiry_visit1_area').val(); // 방문 요청 지역
+			form_data["inquiry_visit1_addr"] = $('#inquiry_visit1_addr').val(); // 방문 요청 상세 주소
+
+			form_data["inquiry_visit2_date"] = $('#inquiry_visit2_date').val(); // 직접 방문 날짜
+
+			form_data["inquiry_curr"] = $('#inquiry_curr').val(); // 현재 운영 사이트
+			form_data["inquiry_ref"] = $('#inquiry_ref').val(); // 제작에 참고할 사이트
+
+			form_data["tmpfilekey"] = $("#tmpfilekey").val();
+			form_data["description"] = $("#inquiry_description").val();
+			form_data["{csrf_token_name}"] = $.cookie('csrf_{csrf_token_name}');
+			$.ajax({
+				url: '/hp/inquiry_message_send',
+				method: 'POST',
+				data: form_data,
+				dataType: 'JSON',
+				success: function (data, textStatus, jqXHR) {
+					alert(confirm_msg);
+
+					location.reload();
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+				},
+				complete: function (jqXHR, textStatus) {
+					cs_form.state = 'idle';
+				},
+			});
+			return false;
+		});
+	},
+};
+
+$(function () {
+	$('#inquiry_phone').on('keyup', function() {
+		$(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+
+	$('tit').html('메일플러그 기업홈페이지 : 시안제작, 메인페이지, 무료제작');
+	cs_form.activate();
+
+	$('#movetopbt').on('click', function () {
+		ga_url('draft_submit_scrollup_20180124');
+		$('body,html').animate({ scrollTop: '300' }, 680);
+	});
+
+	// jquery.fileupload.js input hide
+	$("input[name='upload_file']").hide();
+	$("#file_btn").on("click", function (e) {
+		$("input[name='upload_file']").trigger("click");
+	});
+
+	// Gitple('boot');
+	// Gitple('hide');
+	// $('#chat_counsel').on("click", function () {
+	// 	Gitple('open');
+
+	// 	$('#gitple-launcher').off('click').on('click', function (e) {
+	// 		Gitple('hide');
+	// 	});
+	// });
+
+	// 2018-12-03
+	$(document).ready(function () {
+		$('input[name="inquiry_type"]').change(function () {
+			if ($(this).val() == 3) {
+				$('#inquiry_type3_place').show();
+			} else {
+				$('#inquiry_type3_place').hide();
+				$('#inquiry_type3_pull').trigger('click');
+			}
+		})
+
+		$('input[name="inquiry_type3"]').change(function () {
+			if ($(this).val() == 1) {
+				$('#inquiry_type3_pull_body').show();
+				$('#inquiry_type3_push_body').hide();
+				$('#inquiry_visit2_date').val('');
+				$('#inquiry_visit1_area').val('지역 선택');
+			} else {
+				$('#inquiry_type3_pull_body').hide();
+				$('#inquiry_type3_push_body').show();
+				$('#inquiry_visit1_date').val('');
+				$('#inquiry_visit1_addr').val('');
+			}
+		})
+
+		$.datepicker.setDefaults({
+			dateFormat: 'yy-mm-dd',
+			prevText: '지난 달',
+			nextText: '다음 달',
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			showMonthAfterYear: true,
+			yearSuffix: '년'
+		});
+
+		$('#inquiry_visit1_date, #inquiry_visit2_date').datepicker({
+			minDate: 1,
+			maxDate: 31,
+			beforeShowDay: function (date) {
+				var day = date.getDay();
+				return [(day != 0 && day != 6)];
+			}
+		});
+
+		$('#inquiry_visit1_area').on('change', function () {
+			$('#inquiry_visit1_addr').focus();
+		})
+	})
+});
+</script>

@@ -1,0 +1,27 @@
+<script des="이벤트 종료일 타이머">
+	function time_ticker(){
+		var targetDate = new Date('03/01/2021 00:00 AM'),
+		nowDate = new Date(),
+		tRemain = targetDate - nowDate,
+		_sec = 1000,
+		_min = _sec * 60,
+		_hour = _min * 60,
+		_day = _hour * 24;
+		var days = Math.floor(tRemain / _day); 
+		var hours = Math.floor((tRemain % _day) / _hour); 
+		var minutes = Math.floor((tRemain % _hour) / _min); 
+		var seconds = Math.floor((tRemain % _min) / _sec);
+
+		if(tRemain > 0){ 
+            // 각 해당 날짜 시간 분 태그에 텍스트 삽입
+			$('#ticking .day strong').text(days);
+			$('#ticking .hour strong').text(hours);
+			$('#ticking .minutes strong').text(minutes);
+		}
+	}
+
+$(function(){
+    setInterval(time_ticker,1000);
+});
+</script>
+

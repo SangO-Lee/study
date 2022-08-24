@@ -1,0 +1,8 @@
+<script>
+    $('.dh-attach a').click(function(e){
+        e.preventDefault();
+        var _fileName = $(this).text();
+        var _src = '/skin/upload/' + _fileName;
+        window.open(_src);
+    });
+</script>

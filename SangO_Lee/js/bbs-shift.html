@@ -1,0 +1,51 @@
+<script>
+    $(function(){
+        //bbs shift
+        if($('.bbs-area').length){
+			if($('#board_map_wrap').length){
+                $('.board_wrapper, .calendar_wrapper, .pagination_wrap').appendTo('.bbs-area').css('visibility','visible');
+                $('.search_wrap').eq(1).appendTo('.bbs-area');
+                $('.search_wrap').css('visibility','visible');
+            }else{
+                $('.board_wrapper, .search_wrap,.calendar_wrapper, .pagination_wrap').appendTo('.bbs-area').css('visibility','visible');
+            }
+        }else if($('.total_search_title').length){
+            $('.board_wrapper').css('visibility','visible');
+        }
+    });
+</script>
+<style>
+.board_wrapper,.calendar_wrapper{
+    margin-top:0;
+    visibility: hidden;
+}
+.pagination_wrap, .search_wrap{
+    visibility: hidden;
+}
+#form_history_list .board_wrapper,
+#form_history_nologin .board_wrapper{
+    visibility:visible;
+}
+</style>
+
+
+<!-- 구빌더 -->
+<script>
+        //게시판 레이아웃
+    if($('.dh-margin-top').length){
+        //게시판 목록
+        $('.bbs-list-view-layout + .row,.dh-board,.dh-view-box,#mailForm,.bbs-blog-view-layout + .row,#mod_type_formForm').appendTo('.bbs-area').css('visibility','visible');
+        $('#insertForm').css('visibility','visible');
+    }else{
+        //게시판 내용
+        $('#calendar').parent().appendTo('.bbs-area').css('visibility','visible');
+        $('.bbs-list-view-layout + .row,.dh-board,.dh-view-box,#insertForm,#mailForm,.bbs-blog-view-layout + .row,#mod_type_formForm').appendTo('.bbs-area').css('visibility','visible');
+    }
+</script>
+
+<script>
+if(!$('.dh-margin-top').length){
+    $('.bbs-blog-view-layout + .row').insertAfter('.dh-view-box');
+}
+
+</script>

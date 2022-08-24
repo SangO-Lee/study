@@ -1,0 +1,74 @@
+/* 회원가입 상단영역에는 <span>태그 하나만 넣고 사용해주세요 */
+/*join form css*/
+.join-agree-area{
+    padding: 100px 15px;
+    background:#f5f5f5;
+}
+.join-agree-area .panel-default{
+    margin: 100px auto;
+    width: 1170px;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.join-agree-area .panel-footer{
+    background:#fff;
+}
+#joinForm  .btn-default,
+#joinForm .btn-success,
+.join-agree-area .btn-default{
+    border-radius: 0;
+    border:2px solid #ed1c24;
+    color:#fff;
+    font-weight:500;
+    background:#ed1c24;
+}
+.join-agree-area  .control-label{
+    font-size:18px;
+}
+.join-agree-area  .form-control{
+    border-radius: 0;
+    background:#f5f5f5;
+}
+#joinForm{
+    padding: 50px 15px;
+    background:#f5f5f5;
+}
+#joinForm .panel-default{
+    width:800px;
+    max-width:100%;
+    margin:0 auto;
+    border-radius: 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+#joinForm .panel-heading{
+    background:#fff;
+    font-size:20px;
+    text-transform: uppercase;
+}
+#joinForm .panel-footer{
+    background:#fff;
+}
+#joinForm .form-control{
+    border-radius:0;
+}
+#joinForm  .btn-default{
+    background:#f5f5f5;
+    color:#777;
+    border:1px solid #ddd;
+}
+@media(max-width:767px){
+    .join-agree-area{
+        padding:50px 15px;
+    }
+    .join-agree-area .panel-default{
+        margin:0 auto;
+    }
+    #joinForm .panel-footer .form-group > div{
+        width:50%;
+        float:left;
+    }
+    #joinForm .control-label br{
+        display:none;
+    }
+}

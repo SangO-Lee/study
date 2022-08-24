@@ -1,0 +1,14 @@
+<script>
+	//테이블 반응형
+	var tablewrap = $('.table-style').parent().attr('class');
+	if(tablewrap != 'table-responsive'){
+		$('.table-style').wrap('<div class="table-responsive"></div>');
+	}
+
+	 //게시글 없을때 colgroup 자동 정리
+	if($('.table_default tbody tr:first-child td').length == 1){
+		var _colLength = $('.table_default thead tr th:visible').length;
+		$('.table_default tbody tr:first-child td:first-child').attr('colspan',_colLength);
+	}
+
+</script>

@@ -1,0 +1,59 @@
+<a href="#" id="scrolltop">
+    <div class="inner">
+        <i class="fas fa-chevron-up"></i>
+        <span>TOP</span>
+    </div>
+</a>
+<script>
+    function topFadeToggle(target){
+        var window_t = $(window).scrollTop();
+        if(window_t == 0){
+            $(target).fadeOut();
+        }else if(window_t > 0){
+            $(target).fadeIn();
+        }
+    }
+    $(function(){
+        //top button
+        if($('.subpage').length){
+            topFadeToggle('#scrolltop');
+        }
+        $(window).scroll(function(){
+            topFadeToggle('#scrolltop');
+        });
+        $('#scrolltop').click(function(e){
+            e.preventDefault();
+            $('body,html').animate({
+                scrollTop:0
+            },500, 'easeOutCubic');
+        });
+    });
+</script>
+
+<style>
+    #scrolltop{
+	position:fixed;
+	z-index: 1000;
+	right:50px;
+	bottom:50px;
+	display: none;
+	font-size:16px;
+	text-align:center;
+	width:80px;
+	height:80px;
+	color:#fff;
+	background:#0f4c81;
+	border-radius: 50%;
+	box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+#scrolltop .inner{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	line-height:1;
+}
+#scrolltop .inner i{
+	font-size:30px;
+}
+</style>

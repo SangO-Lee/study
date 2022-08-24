@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+      <loc>http://iestech.co.kr/</loc>
+      
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/page/greeting</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/page/history</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/page/equipment</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/page/reagent</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/page/consulting</loc>
+   </sitemap>
+   <sitemap>
+      <loc>http://iestech.co.kr/form/write?frm_id=inquiry</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/board/list?bd_id=catalog</loc>
+   </sitemap>
+  <sitemap>
+      <loc>http://iestech.co.kr/board/list?bd_id=notice</loc>
+   </sitemap>
+</sitemapindex>

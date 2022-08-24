@@ -1,0 +1,38 @@
+<div class="subpage-content">
+    <section class="se1"></section>
+    <section class="se2"></section>
+    <section class="se3"></section>
+    <section class="se4"></section>
+</div>
+
+
+<script description="스크롤시 특정 섹션에 클래스를 더해주는 스크립트">
+
+    function scrollClassing(tgt){
+        var window_t = $(window).scrollTop();
+        var window_h = $(window).height() / 2;
+        var baseline = window_t + window_h; //화면이 섹션 중간쯤 왔을때 이벤트 작동
+        var target= tgt; //섹션에 해당하는 엘리멘트
+        var count = target.length; // 총 엘리멘트 갯수
+        var lastIdx = count - 1; //마지막 엘리멘트
+
+        for(var i = 0 ; i < count ; i++){
+            var cond1 = target.eq(i).offset().top;
+            
+            if(i == lastIdx){
+                if(baseline > cond1){ //마지막 엘리멘트 이후는 항상 마지막 엘리멘트에 active 추가
+                    target.eq(i).addClass('active');
+                }
+            }else{
+                var cond2 = target.eq(i+1).offset().top;
+                if(baseline > cond1 && baseline < cond2){
+                    target.eq(i).addClass('active');
+                }
+            }
+        }
+    }
+
+    $(window).scroll(function(){  //반드시 window scroll 안에 함수 선언
+       scrollClassing($('.subpage-content section'));
+    });
+</script>

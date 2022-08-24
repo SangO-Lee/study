@@ -1,0 +1,9 @@
+//코벡
+<script>
+    //테이블 정렬 순서 변경 처음이 아래로, 마지막이 위로
+    var _total = $('table tbody tr').length;
+    for(i=0;i<_total;i++){
+        var _target = $('table tbody tr').eq(i);
+        $('table tbody tr:last-child').insertBefore(_target);
+    }
+</script>

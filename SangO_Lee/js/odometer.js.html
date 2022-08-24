@@ -1,0 +1,25 @@
+<span class="odometer">0</span>
+
+<link rel="stylesheet" href="/skin/odometer/odometer-theme-default.css" />
+<script type="text/javascript" src="/skin/odometer/odometer.min.js"></script>
+<script>
+$(document).ready(function(){
+		//main summary counter up
+		const summaryTop = $('#main-summary').offset().top;
+		$(window).scroll(function(){
+			odorScroll();
+		});
+		odorScroll();
+
+		function odorScroll(){
+			const window_t = $(window).scrollTop();
+			const window_h = $(window).height();
+			if(window_t >= summaryTop - window_h){
+				$('.case1 .odometer').text(2001);
+				$('.case2 .odometer').html(3348);
+				$('.case3 .odometer').html(2043);
+				$('.case4 .odometer').html(55);
+			}	
+		};
+	});
+</script>
