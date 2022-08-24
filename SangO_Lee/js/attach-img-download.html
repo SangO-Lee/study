@@ -1,0 +1,47 @@
+<script>
+$(document).ready(function() {
+    $('.dh-attach img').each(function(event) {
+    $(this).wrap('<div class="dh-attach-img"></div>');
+
+        var _src = $(this).attr('src');
+        var _file = _src.split('/');
+        var _link = '<a class="btn btn-primary btn-sm" href="/download.php?file=' + _file[3] + '"><i class="fa fa-download fa-fw"></i> 다운로드</a>';
+
+        $(this).parent().append(_link);
+    })
+})
+</script>
+<style>
+.dh-attach-img {
+    display: inline-block;
+    position: relative;
+}
+
+.dh-attach-img img {
+    position: relative;
+}
+
+.dh-attach-img .btn {
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+    border-radius: 0;
+    border: 0;
+    background: #333;
+    border: 1px solid #333;
+    color: #e3e5e7;
+    padding: 7px 15px;
+    font-size: 11px;
+    opacity: .25;
+    transition: ease-in-out .15s all;
+}
+
+.dh-attach-img:hover .btn {
+    opacity: 1;
+}
+
+.dh-attach-img:hover .btn:hover {
+    background: #fff;
+    color: #333;
+}
+</style>

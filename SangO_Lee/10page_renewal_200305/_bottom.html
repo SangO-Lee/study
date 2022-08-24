@@ -1,0 +1,131 @@
+<div class="content_wrap">
+	<div class="content_box5">
+		<div class="content" id="popup_wrap">
+			<div class="cont type5">
+				<div class="call_left">
+					<p class="call_num">T. 1522-1040</p>
+					<p class="call_txt">고민하지 말고 지금 물어보세요. 궁금하신 점 바로 답변 드립니다.</p>
+				</div>
+				<div class="call_center">
+					<p class="call_time">평일 오전 <span>10:00 ~</span> 오후 <span>07:00</span></p>
+					<p class="call_txt">· 토요일, 일요일, 공휴일 휴무<br>· E-mail&nbsp;&nbsp;help@10page.co.kr</p>
+				</div>
+				<div class="call_right">
+					<a class="call_btn" href="/hp/inquiry?utm_source={wrap_kind}&utm_medium=button&utm_campaign=10page&utm_content=inquiry"><span>문의하기</span></a>
+					{? ENVIRONMENT !== "production"}<a class="call_btn" id="intro_download" href="javascript:;"><span>제안서 다운로드</span></a>{/}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{? ENVIRONMENT !== "production"}
+<div id="popup_hp_info">
+	<div class="pop hp_info" id="pop_hp_info" style="z-index:1100;">
+		<form id="hp_info" method="post" target="_blank" action="/board/board_item_post_pop">
+			<input type="hidden" name="{csrf_token_name}" value="{csrf_hash}">
+			<input type="hidden" name="headText" id="headText" value="제안서(홈페이지)">
+			<input type="hidden" name="headSubText" id="headSubText" value="">
+			<input type="hidden" name="headSubId" id="headSubId" value="{= _GET['id']}">
+			<input type="hidden" name="userName" id="userName" value="">
+			<input type="hidden" name="userEmail" id="userEmail" value="">
+			<input type="hidden" name="ba_company" id="ba_company" value="">
+			<input type="hidden" name="sv_type" id="sv_type" value="13">
+			<input type="hidden" name="nc_progress" value="15" />
+			<input type="hidden" name="nc_status" id="nc_status" value="1" />
+
+			<i class="close_icon close_popup"></i>
+			<div class="pop_header">제안서 다운로드</div>
+			<div class="pop_content">
+				<table class="pop_table" cellspacing="0" cellpadding="0">
+					<colgroup>
+						<col width="140">
+						<col width="*">
+					</colgroup>
+					<tr>
+						<th>회사명 <img src="/hp/asset/images/important.png"></th>
+						<td>
+							<input type="text" class="big_input" name="company_name" id="company_name">
+						</td>
+					</tr>
+					<tr>
+						<th>전화/휴대폰 <img src="/hp/asset/images/important.png"></th>
+						<td>
+							<input type="text" class="big_input" name="ba_tel" id="ba_tel" maxlength="11" placeholder="숫자만 입력하세요." numberOnly>
+						</td>
+					</tr>
+					<tr>
+						<th>이메일 <img src="/hp/asset/images/important.png"></th>
+						<td>
+							<div>
+								<input type="text" class="small_input" id="pop_email_local" value=""><span class="
+								 txt">@</span><input
+								 type="text" class="small_input" id="pop_email_domain">
+								<select class="mail_select" id="mail_select">
+									<option value="" selected="">직접입력</option>
+									<option value="naver.com">naver.com</option>
+									<option value="nate.com">nate.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="hanmail.net">hanmail.net</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="hotmail.com">hotmail.com</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="pop_bottom">
+				<div class="check">
+					<input type="checkbox" name="agree_private_terms" id="agree_private_terms" class="agree_check" validate="required:true"
+					 ename="개인정보 수집 활용 동의" title="개인정보 수집 활용 동의" />
+					<label for="agree_private_terms">
+						<a href="https://www.mailplug.com/front/member/terms/privacyguide" target="_blank">개인정보 수집 및 이용방침</a>에 동의합니다.
+					</label>
+				</div>
+				<button class="btn" type="button" id="btn_down_brochure">다운로드</button>
+			</div>
+		</form>
+	</div>
+</div>
+{/}
+<div id="popup_blind"></div>
+<!-- <div class="darkquick_wrap">
+	<ul>
+		<li>
+			<div class="inner">
+				<div class="headset-box">
+					<i class="icon headset"></i>	
+				</div>
+				<span>
+					서비스 신청
+					<i class="icon quick_number"></i>
+				</span>
+			</div>
+		</li>
+		<li>
+			<a href="/hp/inquiry?utm_source=inquiry&utm_medium=quickmenu&utm_campaign=quickmenu" alt="제작/견적문의">
+				<i class="icon darkquick3"></i>
+				<span>제작/견적<br>문의</span>
+			</a>
+		</li>
+		<li>
+			<a href="/hp/inquiry?type=visit&utm_source=inquiry_visit2&utm_medium=quickmenu&utm_campaign=quickmenu" alt="제작/견적문의">
+				<i class="icon darkquick8"></i>
+				<span>방문상담<br>문의</span>
+			</a>
+		</li>
+		
+		<li>
+			<a href="/hp/voucher?utm_source=voucher&utm_medium=quickmenu&utm_campaign=quickmenu" alt="수출바우처사업">
+				<i class="icon darkquick7"></i>
+				<span>수출바우처<br>사업</span>
+			</a>
+		</li>
+	</ul>
+	<div class="darkquick_top">
+		<a href="javascript:;" class="quick_box">
+			<span>TOP</span>
+			<i class="icon darkquick5"></i>
+		</a>
+	</div>
+</div> -->

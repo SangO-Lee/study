@@ -1,0 +1,11 @@
+<script>
+    $(function(){
+        //blog asttach-fix
+        $('#insertForm .btn-group label').click(function(){
+            labelIdx = $(this).index() +1 ;
+            labelName = 'thumbnail_option' + labelIdx;
+            $('div[class*="thumbnail_option"]').hide();
+            $('.' + labelName).show();
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+<script>
+		//주문폼 동의체크
+        $('#mod_type_formForm .btn').attr('disabled', 'disabled');
+        $('#mod_type_formForm input[value="Agree"]').on('click',function() {
+            if ($('#mod_type_formForm input[value="Agree"]').is(":checked")) {
+                $('#mod_type_formForm .btn').removeAttr('disabled');
+            }else{
+                $('#mod_type_formForm .btn').attr('disabled', 'disabled');
+            }
+        });
+	
+	
+		//주문폼 동의체크 v2
+        $('#mod_type_formForm .btn').attr('disabled', 'disabled');
+        $('#mod_type_formForm .q_number:nth-child(5) .checkbox label:first-child input').on('click',function() {
+            if ($('#mod_type_formForm .q_number:nth-child(5) .checkbox label:first-child input').is(":checked")) {
+                $('#mod_type_formForm .btn').removeAttr('disabled');
+            }else{
+                $('#mod_type_formForm .btn').attr('disabled', 'disabled');
+            }
+        });
+</script>

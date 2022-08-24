@@ -1,0 +1,58 @@
+<script description="원페이지 스크롤 메인에서 스크롤 이동해야하는 경우">
+$(function(){
+	$('.navbar-right a[href^="/#"]').click(function(event) {
+			
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(2) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top - 50
+                    }, 1000, 'easeOutCubic');
+                    return false;
+                }
+            }
+        });
+	
+});
+</script>
+
+<script description="각각의 서브페이지 내에서 스크롤 이동 하는 경우 ">
+$(function(){
+    //scroll
+    function paraScroll(targetHash){
+            target = '#' + targetHash;
+            var targetTop = $(target).offset().top;
+            $('html,body').animate({
+                scrollTop: targetTop - 94
+            }, 1000, 'easeOutCubic');
+        }
+        var parsedUrl = new URL(window.location.href);
+        var target = parsedUrl.searchParams.get("target");
+        if(target){
+            paraScroll(target);
+        }
+       
+        $('.navbar-right a').click(function (e) {
+            e.preventDefault();
+            var thisUrl = $(this).attr('href');
+            var paraCk = thisUrl.indexOf('target');
+            if (paraCk == -1) {
+                //파라미터가 없을 경우 
+                $(location).attr('href', thisUrl);
+
+            } else {
+                //파라미터가 있을경우
+                if(location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')){
+                    //같은 페이지 내
+                    thisUrl = thisUrl.split('?target=');
+                    paraScroll(thisUrl[1]);
+                }else{
+                    // 다른페이지일 경우
+                    $(location).attr('href', thisUrl);
+                }
+                
+            }
+        });
+});
+</script>

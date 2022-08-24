@@ -1,0 +1,18 @@
+<script> //대가대 건축공학과
+     $('.main_popup .close').click(function(e){
+        e.preventDefault();
+        $(this).closest('.main_popup').removeClass('show');
+    });
+</script>
+
+<style>
+    .main_popup.center, 
+    .main_popup.main_popup_right {
+        left:15px;
+        right:15px;
+    }
+    .main_popup.show.center, 
+    .main_popup.show.main_popup_right {
+        display: block!important;
+    }
+</style>

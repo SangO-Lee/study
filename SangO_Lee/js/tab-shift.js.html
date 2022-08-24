@@ -1,0 +1,11 @@
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<!-- 익스에선 URL이 안먹으므로 위의 polyfill을 적용해준다 -->
+<script>
+//탭이동
+		var parsedUrl = new URL(window.location.href);
+		var tabpara = parsedUrl.searchParams.get("tab");
+		if(tabpara != null){
+			tabpara = tabpara - 1;
+			$('.tab-menu li').eq(tabpara).children('a').trigger('click');
+		}
+</script>

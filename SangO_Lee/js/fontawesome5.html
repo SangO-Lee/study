@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css">
+<style>
+/* general styling shared between versions */
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* version 4's styling (using calendar-o) */
+.calendar::before {
+  font-family: FontAwesome;
+  content: "\f133";
+}
+
+/* version 5's styling (using updated regular style of calendar) */
+.calendar::before {
+  font-family: "Font Awesome 5 Free";  /* updated font-family */
+  font-weight: 400; /* regular style/weight */
+  content: "\f133";
+}
+
+
+</style>

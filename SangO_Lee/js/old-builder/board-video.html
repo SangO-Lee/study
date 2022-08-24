@@ -1,0 +1,17 @@
+<div class="board-video embed-responsive embed-responsive-16by9" >
+    <span class="video">A1.mp4</span>
+</div>
+
+<script>
+    $(function(){
+        if($('.board-video').length){
+            var target = $('.board-video .video').text();
+            $('.board-video .video').hide();
+            target = '/skin/video/' + target;
+            var tag = '<video controls class="embed-responsive-item">\
+                    <source src="' + target + ' " type="video/mp4" >\
+                </video>';
+            $('.board-video').append(tag);
+        }
+    });
+</script>

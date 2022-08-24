@@ -1,0 +1,28 @@
+<script>
+$(function(){
+	//캐러셀 일시정지 재생버튼
+	var ppbutton = '<li class="ppbtn"><i class="fa fa-pause"></i></li>'
+		$('.carousel-indicators').append(ppbutton);
+		
+		$('.ppbtn').click(function(){
+			if($(this).children().hasClass('fa-pause')){
+				$(this).children().removeClass('fa-pause');
+				$(this).children().addClass('fa-play');
+				 $('#myCarousel').carousel('pause');
+			}else{
+				$(this).children().removeClass('fa-play');
+				$(this).children().addClass('fa-pause');
+				 $('#myCarousel').carousel('cycle');
+			}
+		});
+});
+</script>
+
+<style>
+.carousel-indicators .ppbtn{
+	text-indent:0;
+	color:#fff;
+	border:none;
+	border-radius:0;
+}
+</style>

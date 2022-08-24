@@ -1,0 +1,12 @@
+/* CSS */
+
+/* 여러줄 말줄임을 위해 추가된 속성, 값 */
+.text{
+    display:-webkit-box; 
+    word-wrap:break-word; 
+    -webkit-line-clamp:3; 
+    -webkit-box-orient:vertical; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    height:54px;
+}

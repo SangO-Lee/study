@@ -1,0 +1,90 @@
+/*  구빌더_id의 경우 페이지 전체에 걸려 있어야 하며,
+페이지 안으로 게시판이 append 되어야 사용 가능합니다. */
+
+/* video b type */
+#gallery .dh-board > .dhb-txt-box{
+	float:left;
+	width:25%;
+	margin:0 0 30px;
+	padding:0;
+	border:none;
+	text-align:left;
+	background:transparent;
+}
+#gallery .dhb-txt-list .row > div,
+#gallery .dhb-txt-box > div{
+	width:100%;
+	border:none;
+}
+#gallery .dhb-txt-box h5,
+#gallery .dhb-txt-box > div.col-md-4{
+	display:none;
+}
+#gallery .dhb-txt-box h4{
+	padding: 0 10px;
+	font-size:16px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.dh-vod-thumb > a{
+	display:block;
+	padding-bottom:56%;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.dh-vod-thumb img{
+	display:none;
+}
+.dh-vod-thumb .vod-play-btn{
+	overflow:hidden;
+	background: url(/img/video-play-youtube.png) no-repeat center / 300px auto;
+}
+.dh-margin-top:before{
+	content:'';
+	display:block;
+	clear:both;
+}
+@media(max-width:767px){
+	#gallery .dh-board > .dhb-txt-box{
+		width:100%;
+	}
+}
+/* main thumb  */
+.intro-boardbox-type-vod  .dh-front-blog > div{
+	width:25%;
+}
+.dh-vod-thumb > a{
+	position:relative;
+	overflow:hidden;
+}
+.dh-vod-thumb .video-row-subject{
+	position:relative;
+}
+.dh-vod-thumb .video-row-subject a{
+	display:block;
+	padding: 0 30px 0 10px;
+	font-size:16px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.intro-boardbox-type-vod .label-danger{
+	position:absolute;
+	right:10px;
+	top:0;
+}
+@media(max-width:767px){
+	.intro-boardbox-type-vod  .dh-front-blog > div{
+		width:100%;
+	}
+}
+<script>
+//blog b type
+  var dhb = $('.dhb-thumb');
+  for(var i=0; i<dhb.length; i++) {
+	src = dhb[i].src;
+	dhb.eq(i).parent('a').css('background-image', 'url(' + src + ')');
+  }
+</script>

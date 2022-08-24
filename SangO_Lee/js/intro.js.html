@@ -1,0 +1,35 @@
+<script>
+	var introOpened = sessionStorage.getItem('introOpen');
+	if(!introOpened) {
+		introOpened = '0';
+	}
+	
+// 	function intro() {
+// 		return introOpened;
+// 	}
+
+$(document).ready(function() {
+		//intro
+		if(introOpened == 0){
+			//인트로페이지가 열린적이 없는 경우
+		
+			$('.intro_inner a').click(function() {
+				$('.intro_page').css('display', 'none');
+				sessionStorage.setItem('introOpen','1');
+			});
+			$('#site').css('opacity','1');
+			return false;
+
+		}else if(introOpened ==1){
+			//인트로페이지를 이미 한번 본 경우
+			$('.intro_page').css('display', 'none');
+			 $('#site').css('opacity','1');
+		}
+
+});
+</script>
+<style>
+	#site{
+		opacity:0;
+	}
+</style>

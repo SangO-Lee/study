@@ -1,0 +1,224 @@
+<script type="text/javascript" description="MAILPLUG Multi-Language Script">
+	var currLang = sessionStorage.getItem('currLang');
+	var currLink = document.location.href;
+	var isCurrMain = 0;
+	var linkArr = new Array();
+	linkArr = currLink.split('/');
+	if (!linkArr[3]) isCurrMain = 1;
+	
+	$(document).ready(function() {
+		// 접속 시 기본 언어를 선택합니다.
+		// 한국어: kr / 영어: en / 중국어: cn / 일본어: jp
+		// 그 외에는 ISO 표준국가코드 2자리를 기준으로 지정합니다.
+		// 참조: http://www.iegate.net/country_code.php
+		if (!currLang) { sessionStorage.setItem('currLang', 'en'); currLang = 'en'; }
+		
+		
+		ChangeLang_All();
+		if (isCurrMain) ChangeLang_main(); // 메인일 경우 메인 영역
+	});
+
+	// 언어 변경 버튼 클릭 시
+	function ClickLangBtn(ClickLang) {
+		sessionStorage.setItem('currLang', ClickLang); currLang = ClickLang;
+		
+		var CurrentFileName = document.URL.substring(document.URL.lastIndexOf("/") + 1, document.URL.lastIndexOf("/") + 30);
+		var SliceName = CurrentFileName.substring(0, CurrentFileName.length - 8);
+// 		if (currLink.indexOf('/skin/page') != -1) $(location).attr('href', '/skin/page/' + SliceName + '_' + currLang + '.html');
+		
+		var SliceEnName = CurrentFileName.substring(0,CurrentFileName.length - 8);
+		var SliceName = CurrentFileName.substring(0, CurrentFileName.indexOf('.html'));
+		var lastWord = SliceEnName.slice(- 1);
+		var lastKrWord = SliceName.slice(- 1);
+		lastWord = Number(lastWord);		
+		if (currLink.indexOf('/skin/page') != -1) {
+			if (currLang == "kr") {
+				if(isNaN(lastKrWord)){
+					$(location).attr('href', '/skin/page/' + SliceEnName + '.html');
+				}else{
+					$(location).attr('href', '/skin/page/' + SliceName + '.html');
+				}
+			} else if (currLang =="en") {
+				if(isNaN(lastKrWord) ){
+					$(location).attr('href', '/skin/page/' + SliceEnName + '_en.html');
+				}else{
+					$(location).attr('href', '/skin/page/' + SliceName + '_en.html');					
+				}
+			}else if(currLang =='jp'){
+				if(isNaN(lastKrWord)){
+					$(location).attr('href', '/skin/page/' + SliceEnName + '_jp.html');
+				}else{
+					$(location).attr('href', '/skin/page/' + SliceName + '_jp.html');					
+				}
+			}
+		}
+		
+		ChangeLang_All();
+		if (isCurrMain) ChangeLang_main(); // 메인일 경우 메인 영역
+	}
+	
+	//언어변환함수 모음
+	function ChangeLang_All(){
+		ChangeLang_menu(); // 상단 메뉴
+		ChangeLang_footer(); // 하단 푸터
+		
+		//언어버튼 활성화
+		if (currLang == "kr") {
+			$('.lang').removeClass('active');
+			$('.lang-kr').addClass('active');
+		} else if (currLang =="en") {
+			$('.lang').removeClass('active');
+			$('.lang-en').addClass('active');
+		}else if (currLang =="cn") {
+			$('.lang').removeClass('active');
+			$('.lang-cn').addClass('active');
+		}
+	}
+	/*******************  페이지 전환 시 설정 끝*********************/
+	
+	/*******************상단 네비게이션 바 루트 변경 전 기본설정 시작*********************/
+	
+	// 메뉴 변경 카테고리 = 다국어 메뉴명 삽입
+	var mainKrName = ['DAEBONG','Solution','Product','Support'];
+	var subKrName = ['Company Overview','Global Network','PR Video','Combination Line','Large Size Tandem Line',' Videos',' Main Product Intro','Transfer Lines','Coil Lines','Special Systems','Videos','Downloads','Location','Contact Us'];
+	
+	var mainCnName = ['大奉','解决方案','产品','支持'];
+	var subCnName = ['公司简介','全球网络','公关视频','综合线','大尺寸串联线',' 视频',' 主要产品介绍','传输线','卷料线','特别系统','视频','下载','位置','联系我们'];
+	
+	
+ 	// 메인메뉴명, 링크 추출
+	var mainName = [];
+	var mainPath = [];
+	
+	$($(".divider-vertical").prevAll('li').get().reverse()).each(function() {
+		mainName.push( $(this).find('a').html() );
+		mainPath.push( $(this).find('a').attr('href') );
+	});
+	
+	// 서브메뉴명, 링크 추출, 다국어 서브메뉴명 삽입
+	var subName = [];
+	var subPath = [];
+	
+	$($(".divider-vertical").prevAll('li').children('.dropdown-menu').find('a').get()).each(function() { 
+		subName.push( $(this).html() );
+		subPath.push( $(this).attr('href') );
+	}); 
+	
+	/*******************상단 네비게이션 바 루트 변경 전 기본설정  끝 *********************/
+	
+	/*******************상단 네비게이션 바 변경 시작 *********************/
+	// 상단 메뉴
+	function ChangeLang_menu() {
+        // 영어 변환 시
+        if (currLang == 'en') {
+            for (var i=0; i<mainName.length; i++) {
+                $($(".divider-vertical").prevAll('li').children('a').get().reverse()).eq(i).html(mainName[i]).attr('href', mainPath[i]);	
+            }
+            for (var i=0; i<subName.length; i++) {
+				$('.sub_link > a').eq(i).text(subName[i]);
+                $('.sub_link > a').eq(i).attr('href', subPath[i]);
+            }
+			var isLogin = $('.nav > .divider-vertical+li > ul').hasClass('dropdown-menu');
+			if (!isLogin) {
+				$('.nav > .divider-vertical+li > a').text('Login');
+				$('.nav > .divider-vertical+li+li > a').text('Join');
+			} else {
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(1) > a').text('Account');
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(2) > a').text('Logout');
+			}
+			$('.navbar-inverse .navbar-nav').css('visibility', 'visible');
+        }
+
+        // 한국어 변환 시
+        else if (currLang == 'kr') {
+			var mainKrPath = [];
+			var subKrPath = [];
+            for (var i=0; i<mainName.length; i++) {
+                if (mainPath[i].indexOf("#") != 0 && mainPath[i].indexOf('/skin') == 0) {
+                    mainKrPath[i] = mainPath[i].substring(0, mainPath[i].indexOf('.html')) + "_kr.html";
+                } else if (mainPath[i].indexOf("/bbs") == 0 || mainPath[i].indexOf("/mod") == 0 ) {
+                    mainKrPath[i] = mainPath[i]
+                }
+                $($(".divider-vertical").prevAll('li').children('a').get().reverse()).eq(i).html(mainKrName[i]).attr('href', mainKrPath[i]);	
+            }
+            for (var i=0; i<subName.length; i++) {
+                if (subPath[i].indexOf("#") != 0 && subPath[i].indexOf('/skin') == 0) {
+                    subKrPath[i] = subPath[i].substring(0, subPath[i].indexOf('.html')) + "_kr.html";
+                } else if (subPath[i].indexOf("/bbs/") == 0 || subPath[i].indexOf("/mod/") == 0 ) {
+                    subKrPath[i] = subPath[i]
+                }
+				$('.sub_link > a').eq(i).text(subKrName[i]);
+                $('.sub_link > a').eq(i).attr('href', subKrPath[i]);
+            }
+			
+			var isLogin = $('.nav > .divider-vertical+li > ul').hasClass('dropdown-menu');
+			if (!isLogin) {
+				$('.nav > .divider-vertical+li > a').text('로그인');
+				$('.nav > .divider-vertical+li+li > a').text('회원가입');
+			} else {
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(1) > a').text('내 계정');
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(2) > a').text('로그아웃');
+			}
+			$('.navbar-inverse .navbar-nav').css('visibility', 'visible');
+        }
+		
+		// 중국어 변환 시
+        else if (currLang == 'cn') {
+			var mainCnPath = [];
+			var subCnPath = [];
+            for (var i=0; i<mainName.length; i++) {
+                if (mainPath[i].indexOf("#") != 0 && mainPath[i].indexOf('/skin') == 0) {
+                    mainCnPath[i] = mainPath[i].substring(0, mainPath[i].indexOf('.html')) + "_cn.html";
+                } else if (mainPath[i].indexOf("/bbs") == 0 || mainPath[i].indexOf("/mod") == 0 ) {
+                    mainCnPath[i] = mainPath[i]
+                }
+                $($(".divider-vertical").prevAll('li').children('a').get().reverse()).eq(i).html(mainCnName[i]).attr('href', mainCnPath[i]);	
+            }
+            for (var i=0; i<subName.length; i++) {
+                if (subPath[i].indexOf("#") != 0 && subPath[i].indexOf('/skin') == 0) {
+                    subCnPath[i] = subPath[i].substring(0, subPath[i].indexOf('.html')) + "_cn.html";
+                } else if (subPath[i].indexOf("/bbs/") == 0 || subPath[i].indexOf("/mod/") == 0 ) {
+                    subCnPath[i] = subPath[i]
+                }
+				$('.sub_link > a').eq(i).text(subCnName[i]);
+                $('.sub_link > a').eq(i).attr('href', subCnPath[i]);
+            }
+			
+			var isLogin = $('.nav > .divider-vertical+li > ul').hasClass('dropdown-menu');
+			if (!isLogin) {
+				$('.nav > .divider-vertical+li > a').text('Login');
+				$('.nav > .divider-vertical+li+li > a').text('Join');
+			} else {
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(1) > a').text('Account');
+				$('.nav > .divider-vertical+li > .dropdown-menu > li:nth-child(2) > a').text('Logout');
+			}
+			$('.navbar-inverse .navbar-nav').css('visibility', 'visible');
+        }
+
+	}
+	/*******************상단 네비게이션 바 변경 끝 *********************/
+	
+	/*******************메인 html 변경 시작 *********************/
+	// 메인 영역
+	function ChangeLang_main() {
+		if (currLang == 'en') {
+			//English
+		} else if (currLang == 'kr') {
+			//Korean
+		} 
+		// 새로운 언어 필요 시 else if문을 추가하여 사용
+	};
+
+	// 하단 푸터
+	function ChangeLang_footer() {
+		if (currLang == 'en') {
+			//English
+		} else if (currLang == 'kr') {
+			//Korean
+		} 
+		// 새로운 언어 필요 시 else if문을 추가하여 사용
+	};
+	
+	
+	/*******************메인 html 변경 끝 *********************/
+</script>

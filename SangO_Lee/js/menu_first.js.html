@@ -1,0 +1,10 @@
+<script>
+    $(function(){
+        //대메뉴 클릭시 첫번째 하위 메뉴로 이동
+        if($(window).width()>767){
+            $('.dropdown-toggle').click(function(){
+                window.location = $(this).next().children('li').eq(0).children('a').attr('href');
+            });
+        }
+    });
+</script>
