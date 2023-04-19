@@ -1,3 +1,93 @@
 .hidden{
     display:none;
 }
+
+#bgimg{
+    z-index: -1;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    object-fit: cover;
+    width:100%;
+    height:100vh;
+    filter: brightness(0.45);
+}
+
+body{
+    display: flex;
+    min-height:100vh;
+    min-width:100vw;
+    justify-content:center;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+body .container{
+    z-index: 10;
+    position:relative;
+    text-align: center;
+    width:1200px;
+    max-width: 100%;
+    color:#fff;
+    min-height: 90vh;
+}
+#greeting{position: absolute;left: 0;top: 0;font-size: 50px;margin: 0;}
+#clock{position: absolute;left: 0;top: 70px;font-size: 55px;margin: 0;}
+#todo-form{position: absolute;right: 0;top: 10px;}
+#todo-input{width: 250px;height: 40px;padding: 0 15px;background: transparent;border: 1px solid rgb(255 255 255 / 50%);border-radius: 5px;color: #fff;font-size: 16px;}
+#todo-input::placeholder{
+    color:#fff;
+    font-size:16px;
+}
+
+#todo-list{position: absolute;right: 0;top: 70px;width: 240px;max-width: 100%;padding: 20px;margin: 0;border: 1px solid rgb(255 255 255 / 50%);border-radius: 5px;min-height: 300px;}
+#todo-list::before{
+    content: "Todo List";
+    font-size: 20px;
+    font-weight: bold;
+    color:#fff;
+    display: block;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgb(255 255 255 / 50%);
+}
+#todo-list li{
+    position: relative;
+    list-style: none;
+    text-align: left;
+    line-height: 2;
+    padding-left:15px;
+}
+#todo-list li:before{
+    content:'-';
+    position: absolute;
+    left:0;
+    top:0;
+}
+#todo-list li button{
+    background: transparent;
+    border: 0;
+    opacity: 0;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+#todo-list li:hover button{
+    opacity: 1;
+}
+#quote{text-align: right;position: absolute;right: 0;bottom: 0;}
+#quote .q-text{
+    font-size: 18px;
+    font-style: italic;
+    display: block;
+    margin-bottom: 15px;
+    width: 400px;
+    max-width: 100%;
+}
+#quote .author{opacity: 0.7;}
+
+#weather{position: absolute;left: 0;top: 132px;}
+#weather .info{
+    display: none;
+}

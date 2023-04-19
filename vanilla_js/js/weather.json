@@ -1,0 +1,41 @@
+{
+    "coord": {
+        "lon": 126.9014,
+        "lat": 37.4842
+    },
+    "weather": [{
+        "id": 800,
+        "main": "Clear",
+        "description": "clear sky",
+        "icon": "01d"
+    }],
+    "base": "stations",
+    "main": {
+        "temp": 300.67,
+        "feels_like": 299.79,
+        "temp_min": 295.04,
+        "temp_max": 301.1,
+        "pressure": 1007,
+        "humidity": 27
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.09,
+        "deg": 180
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1681886510,
+    "sys": {
+        "type": 1,
+        "id": 8105,
+        "country": "KR",
+        "sunrise": 1681851182,
+        "sunset": 1681898994
+    },
+    "timezone": 32400,
+    "id": 1948005,
+    "name": "Kwangmyŏng",
+    "cod": 200
+}
