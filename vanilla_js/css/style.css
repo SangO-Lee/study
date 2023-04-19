@@ -1,5 +1,5 @@
 .hidden{
-    display:none;
+    display:none!important;
 }
 
 #bgimg{
@@ -33,8 +33,31 @@ body .container{
     color:#fff;
     min-height: 90vh;
 }
+
 #greeting{position: absolute;left: 0;top: 0;font-size: 50px;margin: 0;}
-#clock{position: absolute;left: 0;top: 70px;font-size: 55px;margin: 0;}
+#login-form{
+    position: absolute;left: 0;top: 0;
+    display: flex;
+}
+#login-form #user_name{
+    width: 250px;height: 40px;padding: 0 15px;background: transparent;border: 1px solid rgb(255 255 255 / 50%);border-radius: 5px 0 0 5px;color: #fff;font-size: 16px;
+    border-right: 0;
+}
+#login-form #user_name::placeholder{
+    color:#fff;
+    font-size:16px;
+}
+#login-form #login_btn{
+    border-radius: 0 5px 5px 0;
+    background:#fff;
+    color:#222;
+    border:0;
+    padding: 0 15px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+#clock{position: absolute;left: 0;top: 80px;font-size: 55px;margin: 0;}
 #todo-form{position: absolute;right: 0;top: 10px;}
 #todo-input{width: 250px;height: 40px;padding: 0 15px;background: transparent;border: 1px solid rgb(255 255 255 / 50%);border-radius: 5px;color: #fff;font-size: 16px;}
 #todo-input::placeholder{
@@ -87,7 +110,7 @@ body .container{
 }
 #quote .author{opacity: 0.7;}
 
-#weather{position: absolute;left: 0;top: 132px;}
+#weather{position: absolute;left: 0;top: 140px;font-size: 17px;opacity: 0.8;}
 #weather .info{
     display: none;
 }
