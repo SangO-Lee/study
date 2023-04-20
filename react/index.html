@@ -14,10 +14,10 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById('root');
-        const title = (
+        const Title = () => (
             <h3 id='title' onMouseEnter={() => console.log('mouse enter on h3')}>Hello I am a h3</h3>
         );
-        const button = (
+        const Button = () => ( //다른 곳에서 불러오려면 arrow function으로 바꿔야함
             <button id="btn" 
             style={{
                 backgroundColor: "tomato",
@@ -26,17 +26,15 @@
             >Button</button>
         );
        
-        // const h3 = React.createElement("h3", {
-        //     id:"title",
-        //     onMouseEnter:()=> console.log('mouse enter on h3'),
-        // }, "Hello I am a h3");
-
-        // const button = React.createElement('button',{
-        //     id:"btn",
-        //     onClick: () => console.log("I'm clicked"),
-        // }, 'button');
-        const container = React.createElement('div', {id:"container"}, [title, button]);
-        ReactDOM.render(container, root);
+        const Container = () => (
+            <div id="container">
+                <Title />
+                <Button />
+            </div>
+        );
+        
+        // React.createElement('div', {id:"container"}, [title, button]);
+        ReactDOM.render(<Container />, root);
 
      
     </script>
