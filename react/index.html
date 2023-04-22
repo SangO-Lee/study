@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-   <div id="root"></div>
+    <div id="root"></div>
 </body>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        const root = document.getElementById('root');
-        const Title = () => (
-            <h3 id='title' onMouseEnter={() => console.log('mouse enter on h3')}>Hello I am a h3</h3>
-        );
-        const Button = () => ( //다른 곳에서 불러오려면 arrow function으로 바꿔야함
-            <button id="btn" 
-            style={{
-                backgroundColor: "tomato",
-            }}
-            onClick={() => console.log("I'm clicked")}
-            >Button</button>
-        );
-       
-        const Container = () => (
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById('root');
+
+    function App () {
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () =>{
+            setCounter(counter + 1);
+        }
+        return (
             <div id="container">
-                <Title />
-                <Button />
+                <h3 id='title'>Total clicks: {counter}</h3>
+                <button id="btn" onClick={onClick}>Button</button>
             </div>
         );
-        
-        // React.createElement('div', {id:"container"}, [title, button]);
-        ReactDOM.render(<Container />, root);
+    };
 
-     
-    </script>
+    ReactDOM.render(<App/>, root);
+
+</script>
+
 </html>
