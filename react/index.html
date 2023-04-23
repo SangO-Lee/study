@@ -20,11 +20,13 @@
     function App () {
         const [counter, setCounter] = React.useState(0);
         const onClick = () =>{
-            setCounter(counter + 1);
+            // setCounter(counter + 1);
+            setCounter((current) => current + 1);
+            //현재 값을 기준으로 state를 변경하고 싶은 경우 함수를 사용해서 적용할것
         }
         return (
             <div id="container">
-                <h3 id='title'>Total clicks: {counter}</h3>
+                <h1 id='title'>Super Converter {counter}</h1>
                 <button id="btn" onClick={onClick}>Button</button>
             </div>
         );
