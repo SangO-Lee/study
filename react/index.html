@@ -18,16 +18,46 @@
     const root = document.getElementById('root');
 
     function App () {
-        const [counter, setCounter] = React.useState(0);
-        const onClick = () =>{
-            // setCounter(counter + 1);
-            setCounter((current) => current + 1);
-            //현재 값을 기준으로 state를 변경하고 싶은 경우 함수를 사용해서 적용할것
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value);
+        }
+        const reset = () => {
+            setAmount(0);
+        }
+        const onFlip = () =>{
+            setFlipped((current) => !current);
+            reset();
         }
         return (
             <div id="container">
-                <h1 id='title'>Super Converter {counter}</h1>
-                <button id="btn" onClick={onClick}>Button</button>
+                <h1 id='title'>Super Converter</h1>
+                <label htmlFor="min_input">Minutes</label>
+                <input 
+                    value={flipped ? amount * 60 : amount} 
+                    id="min_input" 
+                    className="custom_input" 
+                    type="number" 
+                    placeholder="Minutes" 
+                    onChange={onChange} 
+                    disabled={flipped}>
+                </input>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+                <br/>
+                <h4>You want to convert {amount} into {flipped ? "miniutes" : "hours"}.</h4>
+                <label htmlFor="hr_input">Hours</label>
+                <input 
+                    value={flipped ? amount : Math.round(amount/60)} 
+                    id="hr_input" 
+                    className="custom_input" 
+                    type="number" 
+                    placeholder="Hours" 
+                    onChange={onChange} 
+                    disabled={!flipped}>
+                </input>
+               
             </div>
         );
     };
