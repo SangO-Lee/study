@@ -80,9 +80,14 @@
             </p>
             <ul class="todo-li">
                 <li v-for="todo in todos" >
-                    <a href="javascript:void(0)" @:click="mustDo = todo.text">{{todo.text}}</a>
+                    <a @:submit.prevent @:click="mustDo = todo.text">{{todo.text}}</a>
                 </li>
             </ul>
+            <hr>
+            <input type="text" id="input-key" @:keydown="getKey">
+            <p>
+                지금 누르신 키는 [{{pressedKey}}] 입니다.
+            </p>
         </div>
     </div>
 
@@ -113,6 +118,7 @@
                     mustDo:'아직 정해지지 않았습니다',
                     xPos: 0,
                     yPos: 0,
+                    pressedKey : '  ',
                 }
             },
             methods:{
@@ -124,30 +130,34 @@
                 mousePos(event){
                     this.xPos = event.offsetX;
                     this.yPos = event.offsetY;
-                    console.log(this.xPos, this.yPos);
+                },
+                noneAlert(){
+                    alert('0마리 이하는 불가능 합니다.');
                 },
                 addCount(e, number){
-                    // this.count += number;
-                    console.log(e.target.parentElement.id);
                     if(e.target.parentElement.id == 'lion'){
                         number !== null? this.count[0].lion += number : this.count[0].lion = 0;
                         if(this.count[0].lion < 0){ 
                             this.count[0].lion = 0;
-                            alert('0마리 이하는 불가능 합니다.');
+                            this.noneAlert();
                         }
                     } else if(e.target.parentElement.id == 'tiger'){
                         number !== null? this.count[1].tiger += number : this.count[1].tiger = 0;
                         if(this.count[1].tiger < 0){
                             this.count[1].tiger = 0;
-                            alert('0마리 이하는 불가능 합니다.');
+                            this.noneAlert();
                         }
                     } else if(e.target.parentElement.id == 'fox'){
                         number !== null? this.count[2].fox += number : this.count[2].fox = 0;
                         if(this.count[2].fox < 0){
                             this.count[2].fox = 0;
-                            alert('0마리 이하는 불가능 합니다.');
+                            this.noneAlert();
                         }
                     }
+                },
+                getKey(event){
+                    this.pressedKey = event.keyCode; //키코드 대체 다시 찾기
+                    console.log(event);
                 }
             }
          })
@@ -156,7 +166,7 @@
 
     </script>
 
-    <style>
+    <style lang="scss">
         *{
             box-sizing: border-box;
         }
@@ -190,7 +200,12 @@
             height:200px;
             border:1px solid #ddd;
         }
-        
+        .todo-li a{
+            cursor: pointer;
+        }
+        .todo-li a:hover{
+            text-decoration: underline;
+        }
     </style>
 </body>
 </html>
