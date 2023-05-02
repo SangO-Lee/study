@@ -63,8 +63,8 @@
                 <button @:click="addCount($event, null)">reset</button>
             </div>
             <hr>
-
-            <input type="text" @:input="inputCounter">
+            <h4>* 글자수 세기</h4>
+            <input type="text" @:input="inputCounter" placeholder="글자를 입력해주세요.">
             <p>{{'공백을 제외한 입력한 글자의 수는 ' + inputCount + '개 입니다'}}</p>
             <hr>
 
