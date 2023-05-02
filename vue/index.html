@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="app-wrap"
+            :class="{'light-on' : lightOn, 'light-off' : !lightOn}">
+            <button @:click="lightOn = !lightOn">
+                <span v-if="lightOn">불 끄기</span>
+                <span v-else>불 켜기</span>
+            </button>
+            <hr>
+
+            <p :class="vueClass"
+            :style="{fontSize: 18 + 'px'}">{{message}}</p>
+            <hr>
+
+            <div v-show="false">
+                <img :src="url" 
+                    :alt="imgAlt" 
+                    :class="{responsive : classBoolean}"
+                   >
+            </div>
+            <p v-if="classBoolean">
+                v-if를 활용한 가시성 전환
+            </p>
+            <p v-show="classBoolean">
+                v-show를 활용한 가시성 전환
+            </p>
+            <ul>
+                <li v-for="(sample, index) in todos"
+                    :title="sample.alt">{{sample.text}} + index: {{index}}</li>
+            </ul>
+            <hr>
+
+            <p class="animal-count">
+                {{"사자 : " + count[0].lion + "마리"}}<br>
+                {{"호랑이 : " + count[1].tiger + "마리"}}<br>
+                {{"여우 : " + count[2].fox + "마리"}}
+            </p>
+            <div id="lion">사자
+                <button @:click="addCount($event, 1)">+1</button>
+                <button @:click="addCount($event, 5)">+5</button>
+                <button @:click="addCount($event, -1)">-1</button>
+                <button @:click="addCount($event, null)">reset</button>
+            </div>
+            <div id="tiger">호랑이
+                <button @:click="addCount($event, 1)">+1</button>
+                <button @:click="addCount($event, 5)">+5</button>
+                <button @:click="addCount($event, -1)">-1</button>
+                <button @:click="addCount($event, null)">reset</button>
+            </div>
+            <div id="fox">여우
+                <button @:click="addCount($event, 1)">+1</button>
+                <button @:click="addCount($event, 5)">+5</button>
+                <button @:click="addCount($event, -1)">-1</button>
+                <button @:click="addCount($event, null)">reset</button>
+            </div>
+            <hr>
+
+            <input type="text" @:input="inputCounter">
+            <p>{{'공백을 제외한 입력한 글자의 수는 ' + inputCount + '개 입니다'}}</p>
+            <hr>
+
+            <div class="random-bg"
+                :style="{backgroundColor: 'hsl(' + xPos +',80%,80%)'}"
+                @:mousemove="mousePos">
+                <p>마우스가 움직일 때 배경색을 바꿉니다</p>
+            </div>
+            <hr>
+
+            <p>
+                지금 바로 해야할일 : <strong>{{mustDo}}</strong>
+            </p>
+            <ul class="todo-li">
+                <li v-for="todo in todos" >
+                    <a href="javascript:void(0)" @:click="mustDo = todo.text">{{todo.text}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module">
+         const app = Vue.createApp({
+            data(){
+                return {
+                    count:[
+                        {lion:0},
+                        {tiger:0},
+                        {fox:0},
+                    ],
+                    message : 'hello world',
+                    vueClass: 'pink-bg',
+                    classBoolean : false,
+                    url:'https://www.w3schools.com/images/img_bootcamp_300.png',
+                    imgAlt:'이미지 대체어',
+                    itemInStock: 2,
+                    text: 'I\'d like to eat pizza, hamberger, bulgogi.',
+                    todos:[
+                        {text: '해야할일1',alt:'해야할일1 이미지'},
+                        {text: '해야할일2',alt:'해야할일2 이미지'},
+                        {text: '해야할일3',alt:'해야할일3 이미지'},
+                    ],
+                    lightOn: true,
+                    inputCount:0,
+                    colorVal: 50,
+                    mustDo:'아직 정해지지 않았습니다',
+                    xPos: 0,
+                    yPos: 0,
+                }
+            },
+            methods:{
+                inputCounter(event){
+                    const inputVal = event.target.value.trim().length;
+                    this.inputCount = inputVal;
+                    return inputVal;
+                },
+                mousePos(event){
+                    this.xPos = event.offsetX;
+                    this.yPos = event.offsetY;
+                    console.log(this.xPos, this.yPos);
+                },
+                addCount(e, number){
+                    // this.count += number;
+                    console.log(e.target.parentElement.id);
+                    if(e.target.parentElement.id == 'lion'){
+                        number !== null? this.count[0].lion += number : this.count[0].lion = 0;
+                        if(this.count[0].lion < 0){ 
+                            this.count[0].lion = 0;
+                            alert('0마리 이하는 불가능 합니다.');
+                        }
+                    } else if(e.target.parentElement.id == 'tiger'){
+                        number !== null? this.count[1].tiger += number : this.count[1].tiger = 0;
+                        if(this.count[1].tiger < 0){
+                            this.count[1].tiger = 0;
+                            alert('0마리 이하는 불가능 합니다.');
+                        }
+                    } else if(e.target.parentElement.id == 'fox'){
+                        number !== null? this.count[2].fox += number : this.count[2].fox = 0;
+                        if(this.count[2].fox < 0){
+                            this.count[2].fox = 0;
+                            alert('0마리 이하는 불가능 합니다.');
+                        }
+                    }
+                }
+            }
+         })
+
+         app.mount('#app')
+
+    </script>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin:0;
+        }
+        .app-wrap{
+            min-width:100vw;
+            min-height:100vh;
+            padding:30px;
+        }
+        .pink-bg{
+            width:500px;
+            padding:20px;
+            background:pink;
+        }
+
+        .light-on{
+            color:#333;
+            background:#fff;
+        }
+        .light-off{
+            color:#fff;
+            background:#333;
+        }
+        .random-bg{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width:400px;
+            height:200px;
+            border:1px solid #ddd;
+        }
+        
+    </style>
+</body>
+</html>
