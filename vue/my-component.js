@@ -4,3 +4,4 @@ export default {
     },
     template:`<div> count is {{count}}</div>`
 }
+

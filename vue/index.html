@@ -9,85 +9,29 @@
 </head>
 <body>
     <div id="app">
-        <div class="app-wrap"
-            :class="{'light-on' : lightOn, 'light-off' : !lightOn}">
-            <button @:click="lightOn = !lightOn">
-                <span v-if="lightOn">불 끄기</span>
-                <span v-else>불 켜기</span>
-            </button>
-            <hr>
-
-            <p :class="vueClass"
-            :style="{fontSize: 18 + 'px'}">{{message}}</p>
-            <hr>
-
-            <div v-show="false">
-                <img :src="url" 
-                    :alt="imgAlt" 
-                    :class="{responsive : classBoolean}"
-                   >
-            </div>
-            <p v-if="classBoolean">
-                v-if를 활용한 가시성 전환
-            </p>
-            <p v-show="classBoolean">
-                v-show를 활용한 가시성 전환
-            </p>
-            <ul>
-                <li v-for="(sample, index) in todos"
-                    :title="sample.alt">{{sample.text}} + index: {{index}}</li>
+        <div class="app-wrap">
+            <form @:submit.prevent="addItem" id="shopping-form">
+                <h4>Add item</h4>
+                <p>Item name: <input v-model="itemName" type="text" required></p>
+                <p>How many: <input v-model="itemNumber" type="number" required></p>
+                <p>
+                    Important?
+                    <label for="input-important">
+                        <input type="checkbox" 
+                                v-model="itemImportant" 
+                                id="input-important">
+                        {{itemImportant}}
+                    </label>
+                </p>
+                <button type="submit">Add item</button>
+            </form>
+            <h5>Shopping list:</h5>
+            <ul id="ulToFInd">
+                <li v-for="item in shoppingList"
+                    :class="{impClass : item.important}"
+                    @:click="item.found=!item.found"
+                    v-show="!item.found">{{item.name}}, {{item.number}}</li>
             </ul>
-            <hr>
-
-            <p class="animal-count">
-                {{"사자 : " + count[0].lion + "마리"}}<br>
-                {{"호랑이 : " + count[1].tiger + "마리"}}<br>
-                {{"여우 : " + count[2].fox + "마리"}}
-            </p>
-            <div id="lion">사자
-                <button @:click="addCount($event, 1)">+1</button>
-                <button @:click="addCount($event, 5)">+5</button>
-                <button @:click="addCount($event, -1)">-1</button>
-                <button @:click="addCount($event, null)">reset</button>
-            </div>
-            <div id="tiger">호랑이
-                <button @:click="addCount($event, 1)">+1</button>
-                <button @:click="addCount($event, 5)">+5</button>
-                <button @:click="addCount($event, -1)">-1</button>
-                <button @:click="addCount($event, null)">reset</button>
-            </div>
-            <div id="fox">여우
-                <button @:click="addCount($event, 1)">+1</button>
-                <button @:click="addCount($event, 5)">+5</button>
-                <button @:click="addCount($event, -1)">-1</button>
-                <button @:click="addCount($event, null)">reset</button>
-            </div>
-            <hr>
-            <h4>* 글자수 세기</h4>
-            <input type="text" @:input="inputCounter" placeholder="글자를 입력해주세요.">
-            <p>{{'공백을 제외한 입력한 글자의 수는 ' + inputCount + '개 입니다'}}</p>
-            <hr>
-
-            <div class="random-bg"
-                :style="{backgroundColor: 'hsl(' + xPos +',80%,80%)'}"
-                @:mousemove="mousePos">
-                <p>마우스가 움직일 때 배경색을 바꿉니다</p>
-            </div>
-            <hr>
-
-            <p>
-                지금 바로 해야할일 : <strong>{{mustDo}}</strong>
-            </p>
-            <ul class="todo-li">
-                <li v-for="todo in todos" >
-                    <a @:submit.prevent @:click="mustDo = todo.text">{{todo.text}}</a>
-                </li>
-            </ul>
-            <hr>
-            <input type="text" id="input-key" @:keydown="getKey">
-            <p>
-                지금 누르신 키는 [{{pressedKey}}] 입니다.
-            </p>
         </div>
     </div>
 
@@ -95,69 +39,26 @@
          const app = Vue.createApp({
             data(){
                 return {
-                    count:[
-                        {lion:0},
-                        {tiger:0},
-                        {fox:0},
-                    ],
-                    message : 'hello world',
-                    vueClass: 'pink-bg',
-                    classBoolean : false,
-                    url:'https://www.w3schools.com/images/img_bootcamp_300.png',
-                    imgAlt:'이미지 대체어',
-                    itemInStock: 2,
-                    text: 'I\'d like to eat pizza, hamberger, bulgogi.',
-                    todos:[
-                        {text: '해야할일1',alt:'해야할일1 이미지'},
-                        {text: '해야할일2',alt:'해야할일2 이미지'},
-                        {text: '해야할일3',alt:'해야할일3 이미지'},
-                    ],
-                    lightOn: true,
-                    inputCount:0,
-                    colorVal: 50,
-                    mustDo:'아직 정해지지 않았습니다',
-                    xPos: 0,
-                    yPos: 0,
-                    pressedKey : '  ',
+                    itemName: null,
+                    itemNumber: null,
+                    itemImportant: false,
+                    shoppingList:[],
                 }
             },
             methods:{
-                inputCounter(event){
-                    const inputVal = event.target.value.trim().length;
-                    this.inputCount = inputVal;
-                    return inputVal;
-                },
-                mousePos(event){
-                    this.xPos = event.offsetX;
-                    this.yPos = event.offsetY;
-                },
-                noneAlert(){
-                    alert('0마리 이하는 불가능 합니다. ');
-                },
-                addCount(e, number){
-                    if(e.target.parentElement.id == 'lion'){
-                        number !== null? this.count[0].lion += number : this.count[0].lion = 0;
-                        if(this.count[0].lion < 0){ 
-                            this.count[0].lion = 0;
-                            this.noneAlert();
-                        }
-                    } else if(e.target.parentElement.id == 'tiger'){
-                        number !== null? this.count[1].tiger += number : this.count[1].tiger = 0;
-                        if(this.count[1].tiger < 0){
-                            this.count[1].tiger = 0;
-                            this.noneAlert();
-                        }
-                    } else if(e.target.parentElement.id == 'fox'){
-                        number !== null? this.count[2].fox += number : this.count[2].fox = 0;
-                        if(this.count[2].fox < 0){
-                            this.count[2].fox = 0;
-                            this.noneAlert();
-                        }
+                addItem(){
+                    let item ={
+                        name: this.itemName,
+                        number: this.itemNumber,
+                        important: this.itemImportant,
+                        found:false,
                     }
-                },
-                getKey(event){
-                    this.pressedKey = event.keyCode; //키코드 대체 다시 찾기
-                    console.log(event);
+                    this.shoppingList.push(item);
+                    this.itemName = null;
+                    this.itemNumber = null;
+                    this.itemImportant = false;
+
+                    console.log(item)
                 }
             }
          })
@@ -174,37 +75,29 @@
             margin:0;
         }
         .app-wrap{
-            min-width:100vw;
-            min-height:100vh;
+            width:800px;
+            max-width: 100%;
+            margin:0 auto;
             padding:30px;
+            font-size: 14px;
         }
-        .pink-bg{
-            width:500px;
-            padding:20px;
-            background:pink;
+        .impClass{
+            font-weight:bold;
+            color:tomato;
         }
-
-        .light-on{
-            color:#333;
-            background:#fff;
+        #ulToFInd li{
+            position:relative;
+            cursor:pointer;
         }
-        .light-off{
-            color:#fff;
-            background:#333;
-        }
-        .random-bg{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width:400px;
-            height:200px;
+        #ulToFInd li:hover::before{
+            content:'click to delete';
+            padding:2px 5px;
+            position:absolute;
+            left:30px;
+            top:20px;
             border:1px solid #ddd;
-        }
-        .todo-li a{
-            cursor: pointer;
-        }
-        .todo-li a:hover{
-            text-decoration: underline;
+            box-shadow: 3px 3px 3px rgb(0 0 0 / 10%);
+            background:#fff;
         }
     </style>
 </body>
