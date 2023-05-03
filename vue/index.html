@@ -11,54 +11,13 @@
 <body>
     <div id="app">
         <div class="app-wrap">
-            <form @:submit.prevent="orderMenu">
-                <h4>Select Menu</h4>
-                <hr>
-                <label for="input-menu1">
-                    <input type="radio" name="menu-radio" value="Dinner" id="input-menu1"
-                        @:change="resetSelect"
-                        v-model="inputShow">
-                    Dinner
-                </label>
-                <label for="input-menu2">
-                    <input type="radio" name="menu-radio" value="Drink" id="input-menu2"
-                        @:change="resetSelect"
-                        v-model="inputShow">
-                    Drink
-                </label>
-                <label for="input-menu3">
-                    <input type="radio" name="menu-radio" value="Dessert" id="input-menu3"
-                        @:change="resetSelect"
-                        v-model="inputShow">
-                    Dessert
-                </label>
+            <input type="checkbox" v-model="chbxVal">
+            <p>{{isImportant}}</p>
+            <input type="range" v-model="rangeVal">
+            <p>{{rangeVal}}</p>
 
-                <select name="select-menu" id="select-menu" required
-                    v-model="itemName"
-                    v-show="inputShow">
-                        <option value="" disabled >Select menu</option>
-                        <option v-for="item in itemMenu"
-                        v-show="item.type === inputShow"
-                        :value="item.name">{{item.name}}</option>
-                </select>
-                <div class="amount-box"
-                    v-show="itemName">
-                    <input type="number" placeholder="How many?" id="itemNumber" required
-                            v-model="itemAmount">
-                </div>
-                <button type="submit" id="order-btn">Order</button>
-                <hr>
-                <h4>Receipt</h4>
-                <ul class="order-list">
-                    <li v-for="menu in orderList"
-                        @:click="deleteItem = !deleteItem"
-                        v-show="!deleteItem">
-                        <span class="menu-icon material-symbols-outlined">{{setItemType(menu.menuType)}}</span>
-                        <span class="menu-name">{{menu.menuName}}</span> - 
-                        <span class="menu-amount">{{menu.menuAmount}}</span>
-                    </li>
-                </ul>
-            </form>
+            <div class="mousearea" @:click="updatePos"></div>
+            <p>{{xDiff}}</p>
         </div>
     </div>
 
@@ -66,49 +25,54 @@
          const app = Vue.createApp({
             data(){
                 return {
-                   inputShow : null,
-                   itemName : null,
-                   itemAmount : null,
-                   itemType : null,
-                   deleteItem : false,
-                   itemMenu : [
-                    { name:'Steak', type:'Dinner' },
-                    { name:'Pasta', type:'Dinner' },
-                    { name:'Salad', type:'Dinner' },
-                    { name:'Coke', type:'Drink' },
-                    { name:'Coffee', type:'Drink' },
-                    { name:'Beer', type:'Drink' },
-                    { name:'Cake', type:'Dessert' },
-                    { name:'Macaron', type:'Dessert' },
-                    { name:'Candy', type:'Dessert' },
-                   ],
-                   orderList : []
+                   chbxVal: false,
+                   rangeVal: 80,
+                   xPos:0,
+                   xDiff:0,
                 }
             },
+            watch:{
+                rangeVal(val){
+                    if(val>20 && val<60){
+                        if(val<40){
+                            this.rangeVal = 20;
+                        }else{
+                            this.rangeVal = 60;
+                        }
+                    }
+                },
+                xPos(newVal, oldVal){
+                    this.xDiff = newVal - oldVal
+                }
+
+            },
+            computed:{
+                //복잡한 로직 연산이 많을 경우 사용
+                // 계산값을 캐싱하여 저장하기 때문에, 같은 입력값일 경우 이전 캐싱된 값을 다시 반환함
+                //data 속성이 변경될 때 작동함
+                isImportant() {
+                    if(this.chbxVal){
+                            return 'yes'
+                            }
+                            else {
+                            return 'no'
+                        }
+                    }
+            },
             methods:{
-                orderMenu(){
-                    let menu = {
-                        menuType : this.inputShow,
-                        menuName : this.itemName,
-                        menuAmount : this.itemAmount,
+                // 계산값을 캐싱하지 않음
+                // update가 일어나면 모든 함수를 재실행
+                isImportant2() {
+                    if(this.chbxVal){
+                        return 'yes'
+                        }
+                        else {
+                        return 'no'
                     }
-                    this.orderList.push(menu)
-                    this.itemName = null
-                    this.itemAmount = null
-                    this.inputShow = null
                 },
-                resetSelect(){
-                    this.itemName = ''
-                },
-                /** 메뉴 설정*/
-                setItemType(menu){
-                    if(menu === 'Dinner' ){
-                        return 'restaurant'
-                    } else if(menu === 'Drink' ){
-                        return 'local_bar'
-                    } else if(menu === 'Dessert' ){
-                        return 'icecream'
-                    }
+                updatePos(evt){
+                    this.xPos = evt.offsetX
+
                 }
             }
          })
@@ -131,19 +95,10 @@
             padding:30px;
             font-size: 14px;
         }
-        label, select{
-            display: block;
-            margin-bottom:10px;
-        }
-        .order-list li{
-            cursor: pointer;
-        }
-        .order-list li .menu-icon{
-            margin-right:5px;
-            vertical-align: middle;
-        }
-        .amount-box{
-            margin-bottom:20px;
+        .mousearea{
+            width:300px;
+            height:100px;
+            background:beige;
         }
     </style>
 </body>

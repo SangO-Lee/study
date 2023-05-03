@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="app-wrap">
+            <form @:submit.prevent="orderMenu">
+                <h4>Select Menu</h4>
+                <hr>
+                <label for="input-menu1">
+                    <input type="radio" name="menu-radio" value="Dinner" id="input-menu1"
+                        @:change="resetSelect"
+                        v-model="inputShow">
+                    Dinner
+                </label>
+                <label for="input-menu2">
+                    <input type="radio" name="menu-radio" value="Drink" id="input-menu2"
+                        @:change="resetSelect"
+                        v-model="inputShow">
+                    Drink
+                </label>
+                <label for="input-menu3">
+                    <input type="radio" name="menu-radio" value="Dessert" id="input-menu3"
+                        @:change="resetSelect"
+                        v-model="inputShow">
+                    Dessert
+                </label>
+
+                <select name="select-menu" id="select-menu" required
+                    v-model="itemName"
+                    v-show="inputShow">
+                        <option value="" disabled >Select menu</option>
+                        <option v-for="item in itemMenu"
+                        v-show="item.type === inputShow"
+                        :value="item.name">{{item.name}}</option>
+                </select>
+                <div class="amount-box"
+                    v-show="itemName">
+                    <input type="number" placeholder="How many?" id="itemNumber" required
+                            v-model="itemAmount">
+                </div>
+                <button type="submit" id="order-btn">Order</button>
+                <hr>
+                <h4>Receipt</h4>
+                <ul class="order-list">
+                    <li v-for="menu in orderList"
+                        @:click="deleteItem = !deleteItem"
+                        v-show="!deleteItem">
+                        <span class="menu-icon material-symbols-outlined">{{setItemType(menu.menuType)}}</span>
+                        <span class="menu-name">{{menu.menuName}}</span> - 
+                        <span class="menu-amount">{{menu.menuAmount}}</span>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+         const app = Vue.createApp({
+            data(){
+                return {
+                   inputShow : null,
+                   itemName : null,
+                   itemAmount : null,
+                   itemType : null,
+                   deleteItem : false,
+                   itemMenu : [
+                    { name:'Steak', type:'Dinner' },
+                    { name:'Pasta', type:'Dinner' },
+                    { name:'Salad', type:'Dinner' },
+                    { name:'Coke', type:'Drink' },
+                    { name:'Coffee', type:'Drink' },
+                    { name:'Beer', type:'Drink' },
+                    { name:'Cake', type:'Dessert' },
+                    { name:'Macaron', type:'Dessert' },
+                    { name:'Candy', type:'Dessert' },
+                   ],
+                   orderList : []
+                }
+            },
+            methods:{
+                orderMenu(){
+                    let menu = {
+                        menuType : this.inputShow,
+                        menuName : this.itemName,
+                        menuAmount : this.itemAmount,
+                    }
+                    this.orderList.push(menu)
+                    this.itemName = null
+                    this.itemAmount = null
+                    this.inputShow = null
+                },
+                resetSelect(){
+                    this.itemName = ''
+                },
+                /** 메뉴 설정*/
+                setItemType(menu){
+                    if(menu === 'Dinner' ){
+                        return 'restaurant'
+                    } else if(menu === 'Drink' ){
+                        return 'local_bar'
+                    } else if(menu === 'Dessert' ){
+                        return 'icecream'
+                    }
+                }
+            }
+         })
+
+         app.mount('#app')
+
+    </script>
+
+    <style lang="scss">
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin:0;
+        }
+        .app-wrap{
+            width:800px;
+            max-width: 100%;
+            margin:0 auto;
+            padding:30px;
+            font-size: 14px;
+        }
+        label, select{
+            display: block;
+            margin-bottom:10px;
+        }
+        .order-list li{
+            cursor: pointer;
+        }
+        .order-list li .menu-icon{
+            margin-right:5px;
+            vertical-align: middle;
+        }
+        .amount-box{
+            margin-bottom:20px;
+        }
+    </style>
+</body>
+</html>
