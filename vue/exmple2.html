@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="app-wrap">
+            <form @:submit.prevent="addItem" id="shopping-form">
+                <h4>Add item</h4>
+                <p>Item name: <input v-model="itemName" type="text" required></p>
+                <p>How many: <input v-model="itemNumber" type="number" required></p>
+                <p>
+                    Important?
+                    <label for="input-important">
+                        <input type="checkbox" 
+                                v-model="itemImportant" 
+                                id="input-important">
+                        {{itemImportant}}
+                    </label>
+                </p>
+                <button type="submit">Add item</button>
+            </form>
+            <h5>Shopping list:</h5>
+            <ul id="ulToFInd">
+                <li v-for="item in shoppingList"
+                    :class="{impClass : item.important}"
+                    @:click="item.found=!item.found"
+                    v-show="!item.found">{{item.name}}, {{item.number}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module">
+         const app = Vue.createApp({
+            data(){
+                return {
+                    itemName: null,
+                    itemNumber: null,
+                    itemImportant: false,
+                    shoppingList:[],
+                }
+            },
+            methods:{
+                addItem(){
+                    let item ={
+                        name: this.itemName,
+                        number: this.itemNumber,
+                        important: this.itemImportant,
+                        found:false,
+                    }
+                    this.shoppingList.push(item);
+                    this.itemName = null;
+                    this.itemNumber = null;
+                    this.itemImportant = false;
+
+                    console.log(item)
+                }
+            }
+         })
+
+         app.mount('#app')
+
+    </script>
+
+    <style lang="scss">
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin:0;
+        }
+        .app-wrap{
+            width:800px;
+            max-width: 100%;
+            margin:0 auto;
+            padding:30px;
+            font-size: 14px;
+        }
+        .impClass{
+            font-weight:bold;
+            color:tomato;
+        }
+        #ulToFInd li{
+            position:relative;
+            cursor:pointer;
+        }
+        #ulToFInd li:hover::before{
+            content:'click to delete';
+            padding:2px 5px;
+            position:absolute;
+            left:30px;
+            top:20px;
+            border:1px solid #ddd;
+            box-shadow: 3px 3px 3px rgb(0 0 0 / 10%);
+            background:#fff;
+        }
+    </style>
+</body>
+</html>
