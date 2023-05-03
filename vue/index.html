@@ -41,10 +41,10 @@
                         v-show="item.type === inputShow"
                         :value="item.name">{{item.name}}</option>
                 </select>
-                <div v-show="itemName">
+                <div class="amount-box"
+                    v-show="itemName">
                     <input type="number" placeholder="How many?" id="itemNumber" required
                             v-model="itemAmount">
-                    <br><br>
                 </div>
                 <button type="submit" id="order-btn">Order</button>
                 <hr>
@@ -135,17 +135,15 @@
             display: block;
             margin-bottom:10px;
         }
-        .order-list{
-            padding-left:0;
-        }
         .order-list li{
-            display: flex;
-            align-items: center;
-            width:fit-content;
             cursor: pointer;
         }
         .order-list li .menu-icon{
             margin-right:5px;
+            vertical-align: middle;
+        }
+        .amount-box{
+            margin-bottom:20px;
         }
     </style>
 </body>
