@@ -18,6 +18,11 @@
 
             <div class="mousearea" @:click="updatePos"></div>
             <p>{{xDiff}}</p>
+
+            <hr>
+            <h4>Email Address</h4>
+            <input v-type="email" v-model="inputAddress" placeholder="abc@abc.com">
+            <p :class="myClass">{{feedbackText}}</p>
         </div>
     </div>
 
@@ -29,6 +34,9 @@
                    rangeVal: 80,
                    xPos:0,
                    xDiff:0,
+                   inputAddress:'',
+                   feedbackText: '',
+                   myClass: 'invalid',
                 }
             },
             watch:{
@@ -43,6 +51,19 @@
                 },
                 xPos(newVal, oldVal){
                     this.xDiff = newVal - oldVal
+                },
+                inputAddress(newVal, oldVal){
+                    if( !newVal.includes('@')){
+                        this.feedbackText ='The email address is NOT valid';
+                        this.myCLass = 'invalid';
+                    }
+                    else if(!oldVal.includes('@') && newVal.includes('@')){
+                        this.feedbackText = 'Perfect! You fixed it!';
+                        this.myClass = 'valid';
+                    }
+                    else{
+                        this.feedbackText = 'The email address is valid :)';
+                    }
                 }
 
             },
@@ -50,18 +71,22 @@
                 //복잡한 로직 연산이 많을 경우 사용
                 // 계산값을 캐싱하여 저장하기 때문에, 같은 입력값일 경우 이전 캐싱된 값을 다시 반환함
                 //data 속성이 변경될 때 작동함
+                //html을 참조하지 않음
                 isImportant() {
                     if(this.chbxVal){
-                            return 'yes'
-                            }
-                            else {
-                            return 'no'
-                        }
+                        return 'yes'
                     }
+                    else {
+                        return 'no'
+                    }
+                }
             },
             methods:{
                 // 계산값을 캐싱하지 않음
                 // update가 일어나면 모든 함수를 재실행
+                // 기본적으로 작동원리 자체는 computed와 methods에 큰 차이가 없으나, 캐싱을 하냐 안하냐에 차이가 있다.
+                // Date.now()를 작동시킬경우 computed는 자동으로 업데이트 되지 않지만 methods는 끊임없이 값을 갱신한다.
+                //html을 참조할 수 있음
                 isImportant2() {
                     if(this.chbxVal){
                         return 'yes'
@@ -99,6 +124,12 @@
             width:300px;
             height:100px;
             background:beige;
+        }
+        .invalid{
+            color:red;
+        }
+        .valid{
+            color:blue;
         }
     </style>
 </body>
