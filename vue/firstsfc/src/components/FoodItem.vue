@@ -1,26 +1,57 @@
 <template>
-    <div>
-        <h2>{{ name }}</h2>
-        <p>{{ message }}</p>
-        <p id="red" @:click="countClicks">You have clicked me {{ clicks }} times.</p>
+    <div class="food-box" @:click="toggleFavorite" title="click to favorite">
+        <h2><small v-show="favoriteVal">⭐Favorite⭐</small>{{ foodName }}</h2>
+        <p>{{ foodDes }}</p>
     </div>
 </template>
 
 <script>
  export default{
+    props:{
+        foodName : {
+            type: String,
+            required: true,
+        },
+        foodDes : {
+            type : String,
+            required : false,
+            default : 'This is the default description.',
+            validator: function(value){
+                if( 20<value.length && value.length<50){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } ,
+        isFavorite : {
+            type : Boolean,
+            required : false,
+            default : false,
+        },
+    },
     data(){
         return{
-            name:'apples',
-            message: 'I like apples',
-            clicks: 0,
+            favoriteVal : this.isFavorite
         }
     },
     methods:{
-        countClicks(){
-            this.clicks++
+        toggleFavorite(){
+            this.favoriteVal = !this.favoriteVal
+            console.log(this.favoriteVal);
         }
     }
  }
 </script>
 
-<style></style>
+<style>
+.food-box{
+    cursor: pointer;
+}
+h2 small{
+    float: right;
+    display: block;
+    font-size:13px;
+    text-align: right;
+}
+</style>
