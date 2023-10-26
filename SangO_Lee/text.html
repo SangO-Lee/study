@@ -1,30 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- * 카카오맵 - 지도퍼가기 -->
-<!-- 1. 지도 노드 -->
-<div id="daumRoughmapContainer1660095784923" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="/"></script>
 
-<!--
-	2. 설치 스크립트
-	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
--->
-<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+        <style>
+            .row {
+                display: flex;
+            }
+            .tree-wrap {
+                margin: 50px;
 
-<!-- 3. 실행 스크립트 -->
-<script charset="UTF-8">
-	new daum.roughmap.Lander({
-		"timestamp" : "1660095784923",
-		"key" : "2bbqw",
-		"mapWidth" : "640",
-		"mapHeight" : "360"
-	}).render();
-</script>
-</body>
+                width: fit-content;
+                height: 300px;
+                padding: 50px;
+                /* gap: 60px; */
+                overflow: hidden;
+                justify-content: center;
+
+                border: 1px solid #ddd;
+                background: #f6f7f9;
+            }
+            .tree-wrap .row {
+                position: relative;
+                flex-flow: column;
+                /* gap: 8px; */
+                overflow-y: scroll;
+                overflow-x: visible;
+                height: 315px;
+                padding: 0 30px;
+            }
+            .tree-wrap .row::-webkit-scrollbar {
+                display: none;
+            }
+            .tree-wrap .childTree {
+                padding-left: 60px;
+            }
+
+            .tree-wrap .connection--center {
+                display: none;
+                position: relative;
+                width: 30px;
+            }
+            .connection--center .connection--line {
+                background: rgb(74, 61, 196);
+            }
+
+            .q-btn {
+                position: relative;
+                margin-bottom: 8px;
+                width: 200px;
+                height: 30px;
+                min-height: 30px;
+            }
+            .q-btn.on {
+                color: #fff;
+                border-color: rgb(74, 61, 196);
+                background: rgb(74, 61, 196);
+            }
+            .connection--line {
+                width: 30px;
+                height: 2px;
+                background: #d5d5d5;
+            }
+            .q-btn .connection--line {
+                position: absolute;
+                top: 50%;
+                margin-top: -1px;
+                width: 30px;
+                height: 2px;
+                background: #d5d5d5;
+            }
+            .q-btn.on .connection--line {
+                background: rgb(74, 61, 196);
+            }
+            .no-connection .connection--line {
+                display: none;
+            }
+            .parentTree .q-btn .connection--line {
+                left: 100%;
+                margin-left: 1px;
+            }
+            .childTree .q-btn .connection--line {
+                right: 100%;
+                margin-right: 1px;
+            }
+            .parentTree::after {
+                content: "";
+                display: block;
+                width: 2px;
+                height: calc(19 * 38px - 38px);
+                position: absolute;
+                right: 0;
+                top: 15px;
+                background: #d5d5d5;
+            }
+            .childTree::after {
+                content: "";
+                display: block;
+                width: 2px;
+                height: calc(5 * 38px - 38px);
+                position: absolute;
+                left: 30px;
+                top: calc(15px + 0);
+                background: #d5d5d5;
+            }
+            .no-connection-included::after {
+                top: calc(15px + 38px);
+            }
+
+            .parentTree .q-btn .connection--vertical {
+                z-index: 100;
+                position: absolute;
+                left: 100%;
+                width: 2px;
+                height: auto;
+                top: 50%;
+                bottom: auto;
+                margin-left: 30px;
+                background: rgb(74, 61, 196);
+            }
+
+            .q-btn.on .connection--vertical {
+                bottom: -100px;
+                height: 30px;
+            }
+
+            .childTree .connection--vertical {
+                z-index: 100;
+                position: absolute;
+                right: 100%;
+                width: 2px;
+                height: 0px;
+                top: 0;
+                background: rgb(74, 61, 196);
+                margin-right: -32px;
+            }
+            .childTree .connection--vertical::after {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 30px;
+                height: 2px;
+                top: 50%;
+                right: 100%;
+                margin-top: -1px;
+                background: rgb(74, 61, 196);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row tree-wrap">
+            <div class="parentTree col-5 row">
+                <button class="q-btn">
+                    <span class="label">부모 버튼1</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼2</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn on">
+                    <span class="label">부모 버튼3</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼4</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼5</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼6</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼7</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼8</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼9</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼10</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼11</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼12</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼13</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼14</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼15</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼16</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼17</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼18</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">부모 버튼19</span>
+                    <span class="connection--line"></span>
+                    <span class="connection--vertical"></span>
+                </button>
+            </div>
+            <div class="connection--center">
+                <div class="connection--line"></div>
+            </div>
+            <div class="childTree no-connection-included col-5 row">
+                <button class="q-btn no-connection">
+                    <span class="label">미적용</span>
+                    <span class="connection--line"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">자식버튼1</span>
+                    <span class="connection--line"></span>
+                </button>
+                <button class="q-btn on">
+                    <span class="label">자식버튼2</span>
+                    <span class="connection--line"></span>
+                </button>
+                <button class="q-btn">
+                    <span class="label">자식버튼3</span>
+                    <span class="connection--line"></span>
+                </button>
+
+                <button class="q-btn on">
+                    <span class="label">자식버튼4</span>
+                    <span class="connection--line"></span>
+                </button>
+                <button class="q-btn on">
+                    <span class="label">자식버튼5</span>
+                    <span class="connection--line"></span>
+                </button>
+
+                <div class="connection--vertical"></div>
+            </div>
+        </div>
+
+        <script src="test.js"></script>
+    </body>
 </html>

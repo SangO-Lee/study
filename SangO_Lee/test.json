@@ -1,42 +1,48 @@
-[{
-    "type": "text",
-    "name": "핸드폰번호",
-    "des": "",
-    "inners": "",
-    "maxlength": "",
-    "required": "true",
-    "rank": "0"
-}, {
-    "type": "text",
-    "name": "연령",
-    "des": "",
-    "inners": "",
-    "maxlength": "",
-    "required": "true",
-    "rank": "2"
-}, {
-    "type": "radio",
-    "name": "성별",
-    "des": "",
-    "inners": "여,남",
-    "maxlength": "",
-    "required": "false",
-    "rank": "4"
-}, {
-    "type": "text",
-    "name": "거주지",
-    "des": "",
-    "inners": "",
-    "maxlength": "",
-    "required": "true",
-    "rank": "8"
-}, {
-    "idx": "1",
-    "type": "radio",
-    "name": "지원경로",
-    "des": "",
-    "inners": "프레딧,온라인광고,지인소개,기타",
-    "maxlength": "",
-    "required": "false",
-    "rank": "10"
-}]
+[
+    {
+        "type": "text",
+        "name": "핸드폰번호",
+        "des": "",
+        "inners": "",
+        "maxlength": "",
+        "required": "true",
+        "rank": "0"
+    },
+    {
+        "type": "text",
+        "name": "연령",
+        "des": "",
+        "inners": "",
+        "maxlength": "",
+        "required": "true",
+        "rank": "2"
+    },
+    {
+        "type": "radio",
+        "name": "성별",
+        "des": "",
+        "inners": "여,남",
+        "maxlength": "",
+        "required": "false",
+        "rank": "4"
+    },
+    {
+        "type": "text",
+        "name": "거주지",
+        "des": "",
+        "inners": "",
+        "maxlength": "",
+        "required": "true",
+        "rank": "8"
+    },
+    {
+        "idx": "1",
+        "type": "radio",
+        "name": "지원경로",
+        "des": "",
+        "inners": "프레딧,온라인광고,지인소개,기타",
+        "maxlength": "",
+        "required": "false",
+        "rank": "10"
+    }
+]
