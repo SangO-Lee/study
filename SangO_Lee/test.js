@@ -1,14 +1,4 @@
-const target = document.querySelector(".on");
-console.dir(target);
-
-const onScroll = () => {
-    const offset = target.getBoundingClientRect().top;
-    console.log(offset);
-    target.querySelector(".connection--vertical").style.height = offset + "px";
-};
-
-document.querySelector(".parentTree").addEventListener("scroll", onScroll);
-
+//자식 트리 세로줄 계산
 const activeChildList = document.querySelectorAll(".childTree > .q-btn.on");
 const firstActiveChild = activeChildList[0];
 let lastActiveChild;
@@ -34,3 +24,45 @@ childVerticalLine.style.height =
     lastActiveChildOffset - firstActiveChildOffset + "px";
 
 childVerticalLine.style.top = firstActiveChild.offsetTop + 15 + "px";
+
+//중간 가로선 위치 - 부모버튼 가로선 위치 > 0 ? 부모 세로선 높이 : 부모 세로선 높이 * -1
+const activeParent = document.querySelector(".on");
+let activeParentOffset = activeParent.getBoundingClientRect().top;
+let centerLineOffset =
+    lastActiveChildOffset -
+    (lastActiveChildOffset - firstActiveChildOffset) / 2 -
+    15;
+
+let parentVerticalLineHeight = centerLineOffset - activeParentOffset;
+if (parentVerticalLineHeight < 0) {
+    activeParent.querySelector(".connection--vertical").style.marginTop =
+        parentVerticalLineHeight + "px";
+    parentVerticalLineHeight = parentVerticalLineHeight * -1;
+    activeParent.querySelector(".connection--vertical").style.height =
+        parentVerticalLineHeight + "px";
+}
+
+//스크롤 할때마다 부모 세로선 높이 적용
+const onScroll = () => {
+    activeParentOffset = activeParent.getBoundingClientRect().top;
+    centerLineOffset =
+        lastActiveChildOffset -
+        (lastActiveChildOffset - firstActiveChildOffset) / 2 -
+        15;
+    parentVerticalLineHeight = centerLineOffset - activeParentOffset;
+    if (parentVerticalLineHeight < 0) {
+        activeParent.querySelector(".connection--vertical").style.marginTop =
+            parentVerticalLineHeight + "px";
+        parentVerticalLineHeight = parentVerticalLineHeight * -1;
+        activeParent.querySelector(".connection--vertical").style.height =
+            parentVerticalLineHeight + "px";
+    } else {
+        activeParent.querySelector(".connection--vertical").style.marginTop =
+            "0px";
+        activeParent.querySelector(".connection--vertical").style.height =
+            parentVerticalLineHeight + "px";
+    }
+};
+
+//이벤트 실행
+document.querySelector(".parentTree").addEventListener("scroll", onScroll);
