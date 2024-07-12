@@ -1,49 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js""></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js""></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js""></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js""></script>
+    <script type="text/babel">
+        function Btn({ text, onClick, classlist, fontSize }) {
+            console.log(text, "was rendered.");
+            return (
+                <button
+                    className={classlist}
+                    style={{
+                        fontSize,
+                    }}
+                    onClick={onClick}
+                >
+                    {text}
+                </button>
+            );
+        }
+        Btn.propTypes = {
+            text: PropTypes.string,
+            fontSize: PropTypes.number,
+        };
+        function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => {
+                if (value === "Save Changes") {
+                    setValue("Revert Changes");
+                } else {
+                    setValue("Save Changes");
+                }
+            };
 
-<body>
-    <div id="root"></div>
-</body>
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-    const root = document.getElementById('root');
-   function Btn({title, classlist, big}){
-    return <button className={classlist}
-                   style={{
-                    fontSize : big ? 18 : 16,
-                   }}
-                >{title}</button>
-   }
-  
-    function App () {
-        return (
-            <div id="container">
-                <Btn title="Save Changes" classlist="save-btn" big={true}/>
-                <Btn title="Confirm" classlist="confirm-btn" big={false}/>
-            </div>
-        );
-    };
+            return (
+                <div id="container">
+                    <Btn
+                        text={value}
+                        classlist="save-btn"
+                        onClick={changeValue}
+                        fontSize={18}
+                    />
 
-    ReactDOM.render(<App/>, root);
-
-</script>
-<style>
-    button{
-        margin-right:10px;
-        padding:10px 20px;
-        border:0;
-        border-radius: 10px;
-        background:tomato;
-        color:#fff;
-    }
-</style>
+                    <Btn
+                        text="Continue"
+                        classlist="confirm-btn"
+                        fontSize={18}
+                    />
+                </div>
+            );
+        }
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+    </script>
+    <style>
+        button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            border: 0;
+            border-radius: 10px;
+            background: tomato;
+            color: #fff;
+        }
+    </style>
 </html>
