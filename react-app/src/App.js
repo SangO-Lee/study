@@ -1,45 +1,83 @@
 import { useState, useEffect } from "react";
 
 function App() {
-    const [toDo, setTodo] = useState("");
-    const [toDos, setToDos] = useState([]);
-    const onChange = (event) => {
-        setTodo(event.target.value);
-    };
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log(toDo);
-        if (toDo === "") {
-            return;
-        }
-        setToDos((currentArray) => [toDo, ...currentArray]);
-        // ...뒤에 배열을 붙이면 배열을 구성하는 요소를 풀어서 하나의 배열로 합칠 수 있다.
-        setTodo("");
-    };
-    console.log(toDos);
+    const [loading, setLoading] = useState(true);
+    const [coins, setCoins] = useState([]);
+    const [cost, setCost] = useState("");
+    const [selectedCoin, setSelectedCoin] = useState(null);
+    const [calculatedCost, setCalculatedCost] = useState(0);
 
+    useEffect(() => {
+        fetch("https://api.coinpaprika.com/v1/tickers")
+            .then((response) => response.json())
+            .then((json) => {
+                setCoins(json);
+                setLoading(false);
+            });
+    }, []);
+
+    const onSelectCoin = (event) => {
+        const selectedIndex = event.target.value;
+        const coin = coins[selectedIndex];
+        // console.log("changed coin ", coin);
+        setSelectedCoin(coin);
+    };
+    const onChangeInputCost = (event) => {
+        setCost(Number(event.target.value));
+        // console.log("changed cost " + event.target.value);
+    };
+    const onClick = () => {
+        const isCoin = selectedCoin === null ? coins[0] : selectedCoin;
+        // console.log(isCoin);
+        const calculate =
+            Math.round((cost / isCoin.quotes.USD.price) * 100) / 100;
+        //소수점 2자리까지 반올림
+        setCalculatedCost(calculate);
+    };
     return (
         <div>
-            <form onSubmit={onSubmit}>
-                <h1>My Todos ({toDos.length})</h1>
-                <input
-                    onChange={onChange}
-                    value={toDo}
-                    type="text"
-                    placeholder="Write your to do..."
-                ></input>
-                <button>Add To Do</button>
-            </form>
-            <hr />
-            <ul>
-                {toDos.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-            {/* .map()은 배열에 있는 요소의 갯수 만큼 반복 실행하고, 새로운 배열을 생성해줌
-                toDos.map((item) => item.toUpperCase())
-                위의 예시는 기존 배열의 요소를 그대로 다시 집어넣으면서 toUpperCase 처리를 해주는 형태
-            */}
+            <h1>The Coins! ({coins.length})</h1>
+            {loading ? (
+                <strong>Loading...</strong>
+            ) : (
+                <div>
+                    <select onChange={onSelectCoin}>
+                        {coins.map((coin, index) => (
+                            <option key={coin.id} value={index}>
+                                {coin.name} ({coin.symbol} : $
+                                {coin.quotes.USD.price})
+                            </option>
+                        ))}
+                    </select>
+                    <hr />
+                    <input
+                        type="text"
+                        value={cost}
+                        onChange={onChangeInputCost}
+                        placeholder="보유 달러 금액을 쓰세요"
+                    ></input>
+                    <button onClick={onClick}>계산하기</button>
+                    <p>
+                        {cost ? cost : 0}달러로{" "}
+                        {selectedCoin ? selectedCoin.name : coins[0].name}
+                        코인을 구매한다면 :{" "}
+                        {calculatedCost ? calculatedCost : "0"}{" "}
+                        {selectedCoin ? selectedCoin.symbol : coins[0].symbol}
+                    </p>
+                    <p>
+                        <small>
+                            *1
+                            {selectedCoin
+                                ? selectedCoin.symbol
+                                : coins[0].symbol}{" "}
+                            시세 :{" $"}
+                            {selectedCoin
+                                ? selectedCoin.quotes.USD.price
+                                : coins[0].quotes.USD.price}
+                        </small>
+                    </p>
+                </div>
+            )}
         </div>
     );
 }
