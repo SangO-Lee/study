@@ -1,17 +1,42 @@
-<div class="board-video embed-responsive embed-responsive-16by9" >
+<div class="board-video embed-responsive embed-responsive-16by9">
     <span class="video">A1.mp4</span>
 </div>
 
 <script>
-    $(function(){
-        if($('.board-video').length){
-            var target = $('.board-video .video').text();
-            $('.board-video .video').hide();
-            target = '/skin/video/' + target;
-            var tag = '<video controls class="embed-responsive-item">\
-                    <source src="' + target + ' " type="video/mp4" >\
-                </video>';
-            $('.board-video').append(tag);
+    $(function () {
+        if ($(".board-video").length) {
+            var target = $(".board-video .video").text();
+            $(".board-video .video").hide();
+            target = "/skin/video/" + target;
+
+            // var tag = '<video controls class="embed-responsive-item">\
+            //         <source src="' + target + ' " type="video/mp4" >\
+            //     </video>';
+            // $('.board-video').append(tag);
+
+            //240720 보안처리
+            function escapeHtml(unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            var safeTarget = escapeHtml(target);
+
+            var videoElement = $("<video>", {
+                controls: true,
+                class: "embed-responsive-item",
+            }).append(
+                $("<source>", {
+                    src: safeTarget,
+                    type: "video/mp4",
+                })
+            );
+
+            $(".board-video").append(videoElement);
         }
     });
 </script>

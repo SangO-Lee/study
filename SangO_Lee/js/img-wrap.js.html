@@ -1,19 +1,66 @@
 <script>
+    $(function () {
+        //img wrap
+        // if($('.img-box').length){
+        //  var imgb = $('.img-box');
+        //   for(var i=0; i<imgb.length; i++) {
+        // 	var imgsrc = imgb.eq(i).attr('data-src');
+        // 	imgb.eq(i).css('background-image', 'url(' + imgsrc + ')');
+        //   }
 
-$(function(){
-	//img wrap
-		if($('.img-box').length){
-		 var imgb = $('.img-box');
-		  for(var i=0; i<imgb.length; i++) {
-			var imgsrc = imgb.eq(i).attr('data-src');
-			imgb.eq(i).css('background-image', 'url(' + imgsrc + ')');
-		  }
-			
-			$('.img-box').click(function(){
-				var modalsrc = $(this).attr('data-src');
-				$('#img-zoom img').attr('src',modalsrc);
-				$('#img-zoom').modal();
-			});
-		}
-})
+        // 	$('.img-box').click(function(){
+        // 		var modalsrc = $(this).attr('data-src');
+        // 		$('#img-zoom img').attr('src',modalsrc);
+        // 		$('#img-zoom').modal();
+        // 	});
+        // }
+
+        //240720 보안처리
+        // HTML 이스케이프 함수
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // URL 검증 함수 (간단한 예제)
+        function isValidUrl(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        if ($(".img-box").length) {
+            var imgb = $(".img-box");
+
+            imgb.each(function () {
+                var imgsrc = $(this).attr("data-src");
+                if (isValidUrl(imgsrc)) {
+                    // URL이 유효한 경우에만 배경 이미지 설정
+                    $(this).css(
+                        "background-image",
+                        "url(" + escapeHtml(imgsrc) + ")"
+                    );
+                } else {
+                    console.warn("Invalid URL:", imgsrc);
+                }
+            });
+
+            $(".img-box").click(function () {
+                var modalsrc = $(this).attr("data-src");
+                if (isValidUrl(modalsrc)) {
+                    $("#img-zoom img").attr("src", escapeHtml(modalsrc));
+                    $("#img-zoom").modal();
+                } else {
+                    console.warn("Invalid URL:", modalsrc);
+                }
+            });
+        }
+    });
 </script>
